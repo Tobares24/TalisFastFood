@@ -1,0 +1,97 @@
+﻿@model Infraestructure.Models.FACTURA
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutSidebar.cshtml";
+
+    double Subtotal()
+    {
+        var lista = (List<Infraestructure.Models.DETALLE_ORDEN>)ViewBag.DetalleOrden;
+        var suma = lista.Sum(x => x.MONTO_UNIDAD);
+        var total = (suma * 0.13) + suma;
+        return total;
+    }
+    double Impuesto()
+    {
+        var lista = (List<Infraestructure.Models.DETALLE_ORDEN>)ViewBag.DetalleOrden;
+        var suma = lista.Sum(x => x.MONTO_UNIDAD);
+        var impuestro = (suma * 0.13);
+        return impuestro;
+    }
+}
+
+<h2 class="text-center">Tu pedido</h2>
+
+@using (Html.BeginForm("Save", "Factura", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    @Html.HiddenFor(model => model.ID_ORDEN)
+
+    <div class="row text-center pt-4">
+        <table class="table">
+            <tbody>
+                @foreach (var item in (List<Infraestructure.Models.DETALLE_ORDEN>)ViewBag.DetalleOrden)
+                {
+                    <tr>
+                        <th scope="row" class="w-25">
+                            <img style="width: 20%;" src="@Html.DisplayFor(modelItem => item.PRODUCTO.FOTOGRAFIA)" />
+                        </th>
+                        <td class="pt-4">
+                            @Html.DisplayFor(modelItem => item.PRODUCTO.NOMBRE) <span> x</span>@Html.DisplayFor(modelItem => item.CANTIDAD)
+                        </td>
+                        <td class="pt-4">
+                            <span>₡</span>@Html.DisplayFor(modelItem => item.MONTO_UNIDAD)
+                        </td>
+                        <td class="pt-4">
+                            @Html.DisplayFor(modelItem => item.NOTA)
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <div class="text-end mx-4 d-flex justify-content-between">
+        <div><span style="font-size: 18px; font-weight: bold;">Total:</span></div>
+
+        <div class="d-block text-center">
+            <div>
+                <span style="font-size: 15px; font-weight: bold;">₡@Subtotal()</span>
+            </div>
+            <div>
+                <span style="font-size: 12px;">(Incluye ₡@Impuesto() IVA)</span>
+            </div>
+        </div>
+    </div>
+
+    <hr />
+
+    <div class="mt-5 text-center">
+        <h2>Información para el pago</h2>
+
+        <div class="d-flex align-content-center align-items-center justify-content-between p4">
+            <div>
+                <label class="form-label">Número de Tarjeta</label>
+                <input class="form-control" type="text" />
+            </div>
+            <div>
+                <label class="form-label">Fecha de Caducidad</label>
+                <input class="form-control" type="text" />
+            </div>
+            <div>
+                <label class="form-label">Código de tarjeta</label>
+                <input class="form-control" type="text" />
+            </div>
+            <div>
+                <label class="form-label">Titular de Tarjeta</label>
+                <input class="form-control" type="text" />
+            </div>
+        </div>
+    </div>
+
+    <div class="text-center d-flex justify-content-center align-content-center align-items-center pt-5  pb-4">
+        <button type="submit" value="Guardar" class="botones mt-1 pt-2 pb-2" id="bg-link" style="width: 12%;">
+            <span><i class="fa-solid fa-floppy-disk pe-1"></i>Guardar</span>
+        </button>
+    </div>
+
+}

@@ -1,0 +1,29 @@
+﻿
+@model IEnumerable<Infraestructure.Models.PRODUCTO>
+
+@foreach (var item in Model)
+{
+    <tr>
+        <th scope="row" class="w-25">
+            <img src="@item.FOTOGRAFIA"
+                 role="img"
+                 class="bd-placeholder-img" style="width:20%;">
+        </th>
+        <td class="pt-4">
+            @Html.DisplayFor(modelItem => item.NOMBRE)
+        </td>
+        <td class="pt-4">
+            @switch (item.ESTADO)
+            {
+                case false:
+                    <label>Inactivo</label> break;
+                case true:
+                    <label>Activo</label>break;
+            }
+        </td>
+        <td class="d-flex justify-content-evenly text-center">
+            <a href="@Url.Action("DetalleProductos", "Productos", new { id = item.ID_PRODUCTO })" class="btn btn-primary btnAccion"><i class="fa-solid fa-circle-info"></i> Detalle</a>
+            <a href="@Url.Action("EditarProductos", "Productos", new { id = item.ID_PRODUCTO})" class="btn btn-primary btnAccion"><i class="fa-solid fa-pen"></i> Editar</a>
+            <a href="@Url.Action("Eliminar", "#", "EliminarProducto")" class="btn btn-primary btnAccion"><i class="fa-solid fa-trash"></i> Eliminar</a>
+        </td>
+    </tr>}

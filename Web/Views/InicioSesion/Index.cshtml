@@ -1,0 +1,56 @@
+﻿@model Infraestructure.Models.USUARIO
+
+@{
+    ViewBag.Title = "Inicio de Sesión";
+}
+
+@using (Html.BeginForm("Login", "InicioSesion"))
+{
+    @Html.AntiForgeryToken();
+
+    <div id="contenedorSN">
+        <div id="contenedorSNIMG">
+            <div id="contenidoIS">
+
+                <h4 id="titulo">Inicio de Sesión</h4>
+                <img id="imgUsuario" src="~/Resources/usuario.png">
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div>
+                    <div class="col-md-12 p-2 text-center">
+                        @Html.LabelFor(model => model.EMAIL, htmlAttributes: new { @class = "d-block" })
+                        <br>
+                        <i class="bi bi-envelope-fill"></i>
+                        @Html.EditorFor(model => model.EMAIL, new { htmlAttributes = new { @class = "form-input" } })
+                        <div class="p-0">
+                            @Html.ValidationMessageFor(model => model.EMAIL, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="col-md-12 p-2 text-center">
+                        @Html.LabelFor(model => model.CLAVE, htmlAttributes: new { @class = "d-block" })
+                        <br>
+                        <i class="bi bi-lock-fill"></i>
+                        @Html.PasswordFor(model => model.CLAVE, new { @class = "form-input" })
+                        <div class="p-0">
+                            @Html.ValidationMessageFor(model => model.CLAVE, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="text-center">
+                        <br>
+                        <button class="registro" type="submit" id="bg-link">Ingresar</button>
+                    </div>
+
+                    <div id="btnIngreso" class="text-center mt-2" style="cursor: pointer;">
+                        <a id="contrasenna">¿Ha olvidado su contraseña?</a>
+                    </div>
+                    <br>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

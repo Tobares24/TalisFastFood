@@ -1,0 +1,21 @@
+﻿@model IEnumerable<Infraestructure.Models.MESA>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Código</th>
+            <th>Capacidad</th>
+            <th>Restaurante</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var mesa in (List<Infraestructure.Models.MESA>)ViewBag.listaMesa)
+        {
+            <tr>
+                <td>@mesa.COD_MESA</td>
+                <td>@mesa.CAPACIDAD</td>
+                <td>@mesa.RESTAURANTE.NOMBRE</td>
+            </tr>
+        }
+    </tbody>
+</table>

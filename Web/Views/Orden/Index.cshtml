@@ -1,0 +1,81 @@
+﻿@model IEnumerable<Infraestructure.Models.ORDEN>
+@{ ViewBag.Title = "Gestión de Órdenes";
+    Layout = "~/Views/Shared/_LayoutSidebar.cshtml";
+
+    string FormatearFecha(DateTime fecha)
+    {
+        return fecha.ToString("dd/MM/yyyy");
+    } }
+
+<header style="padding: 20px; width: 100%; background-color: #F78935">
+    <h3 class="text-center text-white">Gestión de Órdenes</h3>
+</header>
+
+<div class="text-center">
+    <a href="@Url.Action("ListaProductos", "Orden")" class="botones mt-2 pt-2 pb-2" id="bg-link" style="width: 12%; margin-left:88%;">
+        <i class="fa-solid fa-plus pe-1"></i><span>Agregar</span>
+    </a>
+</div>
+
+<div class="d-flex justify-content-center align-content-center align-items-center mt-4">
+    <div class="mx-2 my-2">
+        <label>Filtro por estado: </label>
+    </div>
+    <div class="list-group list-group-horizontal">
+        @foreach (var estado in (List<Infraestructure.Models.ESTADO_ORDEN>)ViewBag.listaEstado)
+        {
+            @Ajax.ActionLink(estado.ESTADO,
+                              "ordenesxEstado",
+                              new
+                              {
+                                  id = estado.ID_ESTADO_ORDEN
+                              },
+                              new AjaxOptions
+                              {
+                                  UpdateTargetId = "resultado",
+                                  InsertionMode = InsertionMode.Replace,
+                                  HttpMethod = "GET",
+                              }, new { @class = "list-group-item" }
+                             )}
+    </div>
+</div>
+
+<div id="resultado" class="row text-center pt-4">
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">@Html.DisplayNameFor(model => model.ID_ORDEN)</th>
+                <th scope="col">@Html.DisplayNameFor(model => model.USUARIO)</th>
+                <th scope="col">@Html.DisplayNameFor(model => model.ESTADO_ORDEN)</th>
+                <th scope="col">@Html.DisplayNameFor(model => model.FECHA)</th>
+                <th scope="col">Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <th scope="row" class="w-25">
+                        @Html.DisplayFor(modelItem => item.ID_ORDEN)
+                    </th>
+                    <td class="pt-4">
+                        @Html.DisplayFor(modelItem => item.USUARIO.NOMBRE)
+                    </td>
+                    <td class="pt-4">
+                        @Html.DisplayFor(modelItem => item.ESTADO_ORDEN1.ESTADO)
+                    </td>
+                    <td class="pt-4">
+                        @FormatearFecha(item.FECHA)
+                    </td>
+                    <td class="d-flex justify-content-evenly text-center">
+                        <a href="@Url.Action("DetalleOrden", "Orden", new {id = item.ID_ORDEN})" class="btn btn-primary btnAccion"><i class="fa-solid fa-circle-info"></i> Detalle</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+@section Scripts{
+    @Scripts.Render("~/bundles/jqueryajax")
+}

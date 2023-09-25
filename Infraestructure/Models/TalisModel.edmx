@@ -1,0 +1,1054 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="TALIS_FAST_FOODModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="CATEGORIA_PRODUCTO">
+          <Key>
+            <PropertyRef Name="ID_CATEGORIA" />
+          </Key>
+          <Property Name="ID_CATEGORIA" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NOMBRE" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DETALLE_ORDEN">
+          <Key>
+            <PropertyRef Name="ID_ORDEN" />
+            <PropertyRef Name="ID_PRODUCTO" />
+          </Key>
+          <Property Name="ID_ORDEN" Type="int" Nullable="false" />
+          <Property Name="ID_PRODUCTO" Type="int" Nullable="false" />
+          <Property Name="CANTIDAD" Type="int" Nullable="false" />
+          <Property Name="MONTO_UNIDAD" Type="float" Nullable="false" />
+          <Property Name="NOTA" Type="varchar" MaxLength="300" />
+        </EntityType>
+        <EntityType Name="ESTADO_MESA">
+          <Key>
+            <PropertyRef Name="ID_ESTADO_MESA" />
+          </Key>
+          <Property Name="ID_ESTADO_MESA" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ESTADO" Type="varchar" MaxLength="500" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ESTADO_ORDEN">
+          <Key>
+            <PropertyRef Name="ID_ESTADO_ORDEN" />
+          </Key>
+          <Property Name="ID_ESTADO_ORDEN" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ESTADO" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FACTURA">
+          <Key>
+            <PropertyRef Name="ID_FACTURA" />
+          </Key>
+          <Property Name="ID_FACTURA" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SUBTOTAL" Type="float" Nullable="false" />
+          <Property Name="IMPUESTO" Type="float" Nullable="false" />
+          <Property Name="TOTAL" Type="float" Nullable="false" />
+          <Property Name="FECHA" Type="date" Nullable="false" />
+          <Property Name="ID_ORDEN" Type="int" Nullable="false" />
+          <Property Name="ID_MESA" Type="int" Nullable="false" />
+          <Property Name="ID_USUARIO" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="FACTURA_TIPO_PAGO">
+          <Key>
+            <PropertyRef Name="ID_FACTURA" />
+            <PropertyRef Name="ID_TIPO_PAGO" />
+          </Key>
+          <Property Name="ID_FACTURA" Type="int" Nullable="false" />
+          <Property Name="ID_TIPO_PAGO" Type="int" Nullable="false" />
+          <Property Name="MONTO" Type="float" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MESA">
+          <Key>
+            <PropertyRef Name="ID_MESA" />
+          </Key>
+          <Property Name="ID_MESA" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="COD_MESA" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="CAPACIDAD" Type="int" Nullable="false" />
+          <Property Name="ID_ESTADO_MESA" Type="int" Nullable="false" />
+          <Property Name="ID_RESTAURANTE" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MESA_USUARIO">
+          <Key>
+            <PropertyRef Name="ID_MESA" />
+            <PropertyRef Name="ID_USUARIO" />
+          </Key>
+          <Property Name="ID_MESA" Type="int" Nullable="false" />
+          <Property Name="ID_USUARIO" Type="varchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ORDEN">
+          <Key>
+            <PropertyRef Name="ID_ORDEN" />
+          </Key>
+          <Property Name="ID_ORDEN" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_USUARIO" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="ESTADO_ORDEN" Type="int" Nullable="false" />
+          <Property Name="FECHA" Type="date" Nullable="false" />
+          <Property Name="ID_MESA" Type="int" Nullable="false" />
+          <Property Name="ID_FACTURA" Type="int" />
+        </EntityType>
+        <EntityType Name="PRODUCTO">
+          <Key>
+            <PropertyRef Name="ID_PRODUCTO" />
+          </Key>
+          <Property Name="ID_PRODUCTO" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NOMBRE" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="DESCRIPCION" Type="varchar" MaxLength="300" Nullable="false" />
+          <Property Name="INGREDIENTES" Type="varchar" MaxLength="300" Nullable="false" />
+          <Property Name="PRECIO" Type="float" Nullable="false" />
+          <Property Name="ESTADO" Type="bit" Nullable="false" />
+          <Property Name="FOTOGRAFIA" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="ID_CATEGORIA" Type="int" Nullable="false" />
+          <Property Name="ID_ESTADO" Type="int" />
+        </EntityType>
+        <EntityType Name="PRODUCTO_RESTAURANTE">
+          <Key>
+            <PropertyRef Name="ID_PRODUCTO" />
+            <PropertyRef Name="ID_RESTAURANTE" />
+          </Key>
+          <Property Name="ID_PRODUCTO" Type="int" Nullable="false" />
+          <Property Name="ID_RESTAURANTE" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="RESTAURANTE">
+          <Key>
+            <PropertyRef Name="ID_RESTAURANTE" />
+          </Key>
+          <Property Name="ID_RESTAURANTE" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NOMBRE" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="UBICACION" Type="varchar" MaxLength="500" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ROL">
+          <Key>
+            <PropertyRef Name="ID_ROL" />
+          </Key>
+          <Property Name="ID_ROL" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TIPO_ROL" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TIPO_PAGO">
+          <Key>
+            <PropertyRef Name="ID_TIPO_PAGO" />
+          </Key>
+          <Property Name="ID_TIPO_PAGO" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DESCRIPCION" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="USUARIO">
+          <Key>
+            <PropertyRef Name="ID_USUARIO" />
+          </Key>
+          <Property Name="ID_USUARIO" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="NOMBRE" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="PRIMER_APELLIDO" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="SEGUNDO_APELLIDO" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="TELEFONO" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="EMAIL" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="CLAVE" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="ID_ROL" Type="int" Nullable="false" />
+          <Property Name="ID_RESTAURANTE" Type="int" Nullable="false" />
+          <Property Name="ESTADO" Type="int" />
+        </EntityType>
+        <Association Name="FK_DETALLE_ORDEN_ORDEN">
+          <End Role="ORDEN" Type="Self.ORDEN" Multiplicity="1" />
+          <End Role="DETALLE_ORDEN" Type="Self.DETALLE_ORDEN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ORDEN">
+              <PropertyRef Name="ID_ORDEN" />
+            </Principal>
+            <Dependent Role="DETALLE_ORDEN">
+              <PropertyRef Name="ID_ORDEN" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DETALLE_ORDEN_PRODUCTO">
+          <End Role="PRODUCTO" Type="Self.PRODUCTO" Multiplicity="1" />
+          <End Role="DETALLE_ORDEN" Type="Self.DETALLE_ORDEN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PRODUCTO">
+              <PropertyRef Name="ID_PRODUCTO" />
+            </Principal>
+            <Dependent Role="DETALLE_ORDEN">
+              <PropertyRef Name="ID_PRODUCTO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FACTURA_MESA">
+          <End Role="MESA" Type="Self.MESA" Multiplicity="1" />
+          <End Role="FACTURA" Type="Self.FACTURA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MESA">
+              <PropertyRef Name="ID_MESA" />
+            </Principal>
+            <Dependent Role="FACTURA">
+              <PropertyRef Name="ID_MESA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FACTURA_ORDEN">
+          <End Role="ORDEN" Type="Self.ORDEN" Multiplicity="1" />
+          <End Role="FACTURA" Type="Self.FACTURA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ORDEN">
+              <PropertyRef Name="ID_ORDEN" />
+            </Principal>
+            <Dependent Role="FACTURA">
+              <PropertyRef Name="ID_ORDEN" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FACTURA_TIPO_PAGO_FACTURA">
+          <End Role="FACTURA" Type="Self.FACTURA" Multiplicity="1" />
+          <End Role="FACTURA_TIPO_PAGO" Type="Self.FACTURA_TIPO_PAGO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FACTURA">
+              <PropertyRef Name="ID_FACTURA" />
+            </Principal>
+            <Dependent Role="FACTURA_TIPO_PAGO">
+              <PropertyRef Name="ID_FACTURA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FACTURA_TIPO_PAGO_TIPO_PAGO">
+          <End Role="TIPO_PAGO" Type="Self.TIPO_PAGO" Multiplicity="1" />
+          <End Role="FACTURA_TIPO_PAGO" Type="Self.FACTURA_TIPO_PAGO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TIPO_PAGO">
+              <PropertyRef Name="ID_TIPO_PAGO" />
+            </Principal>
+            <Dependent Role="FACTURA_TIPO_PAGO">
+              <PropertyRef Name="ID_TIPO_PAGO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MESA_ESTADO_MESA">
+          <End Role="ESTADO_MESA" Type="Self.ESTADO_MESA" Multiplicity="1" />
+          <End Role="MESA" Type="Self.MESA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ESTADO_MESA">
+              <PropertyRef Name="ID_ESTADO_MESA" />
+            </Principal>
+            <Dependent Role="MESA">
+              <PropertyRef Name="ID_ESTADO_MESA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MESA_RESTAURANTE">
+          <End Role="RESTAURANTE" Type="Self.RESTAURANTE" Multiplicity="1" />
+          <End Role="MESA" Type="Self.MESA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RESTAURANTE">
+              <PropertyRef Name="ID_RESTAURANTE" />
+            </Principal>
+            <Dependent Role="MESA">
+              <PropertyRef Name="ID_RESTAURANTE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MESA_USUARIO_MESA">
+          <End Role="MESA" Type="Self.MESA" Multiplicity="1" />
+          <End Role="MESA_USUARIO" Type="Self.MESA_USUARIO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MESA">
+              <PropertyRef Name="ID_MESA" />
+            </Principal>
+            <Dependent Role="MESA_USUARIO">
+              <PropertyRef Name="ID_MESA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MESA_USUARIO_USUARIO">
+          <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="1" />
+          <End Role="MESA_USUARIO" Type="Self.MESA_USUARIO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USUARIO">
+              <PropertyRef Name="ID_USUARIO" />
+            </Principal>
+            <Dependent Role="MESA_USUARIO">
+              <PropertyRef Name="ID_USUARIO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ORDEN_ESTADO_ORDEN">
+          <End Role="ESTADO_ORDEN" Type="Self.ESTADO_ORDEN" Multiplicity="1" />
+          <End Role="ORDEN" Type="Self.ORDEN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ESTADO_ORDEN">
+              <PropertyRef Name="ID_ESTADO_ORDEN" />
+            </Principal>
+            <Dependent Role="ORDEN">
+              <PropertyRef Name="ESTADO_ORDEN" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ORDEN_MESA">
+          <End Role="MESA" Type="Self.MESA" Multiplicity="1" />
+          <End Role="ORDEN" Type="Self.ORDEN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MESA">
+              <PropertyRef Name="ID_MESA" />
+            </Principal>
+            <Dependent Role="ORDEN">
+              <PropertyRef Name="ID_MESA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ORDEN_USUARIO">
+          <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="1" />
+          <End Role="ORDEN" Type="Self.ORDEN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USUARIO">
+              <PropertyRef Name="ID_USUARIO" />
+            </Principal>
+            <Dependent Role="ORDEN">
+              <PropertyRef Name="ID_USUARIO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PRODUCTO_CATEGORIA_PRODUCTO">
+          <End Role="CATEGORIA_PRODUCTO" Type="Self.CATEGORIA_PRODUCTO" Multiplicity="1" />
+          <End Role="PRODUCTO" Type="Self.PRODUCTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CATEGORIA_PRODUCTO">
+              <PropertyRef Name="ID_CATEGORIA" />
+            </Principal>
+            <Dependent Role="PRODUCTO">
+              <PropertyRef Name="ID_CATEGORIA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PRODUCTO_RESTAURANTE_PRODUCTO">
+          <End Role="PRODUCTO" Type="Self.PRODUCTO" Multiplicity="1" />
+          <End Role="PRODUCTO_RESTAURANTE" Type="Self.PRODUCTO_RESTAURANTE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PRODUCTO">
+              <PropertyRef Name="ID_PRODUCTO" />
+            </Principal>
+            <Dependent Role="PRODUCTO_RESTAURANTE">
+              <PropertyRef Name="ID_PRODUCTO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PRODUCTO_RESTAURANTE_RESTAURANTE">
+          <End Role="RESTAURANTE" Type="Self.RESTAURANTE" Multiplicity="1" />
+          <End Role="PRODUCTO_RESTAURANTE" Type="Self.PRODUCTO_RESTAURANTE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RESTAURANTE">
+              <PropertyRef Name="ID_RESTAURANTE" />
+            </Principal>
+            <Dependent Role="PRODUCTO_RESTAURANTE">
+              <PropertyRef Name="ID_RESTAURANTE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_USUARIO_RESTAURANTE">
+          <End Role="RESTAURANTE" Type="Self.RESTAURANTE" Multiplicity="1" />
+          <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RESTAURANTE">
+              <PropertyRef Name="ID_RESTAURANTE" />
+            </Principal>
+            <Dependent Role="USUARIO">
+              <PropertyRef Name="ID_RESTAURANTE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_USUARIO_ROL">
+          <End Role="ROL" Type="Self.ROL" Multiplicity="1" />
+          <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ROL">
+              <PropertyRef Name="ID_ROL" />
+            </Principal>
+            <Dependent Role="USUARIO">
+              <PropertyRef Name="ID_ROL" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="TALIS_FAST_FOODModelStoreContainer">
+          <EntitySet Name="CATEGORIA_PRODUCTO" EntityType="Self.CATEGORIA_PRODUCTO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DETALLE_ORDEN" EntityType="Self.DETALLE_ORDEN" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ESTADO_MESA" EntityType="Self.ESTADO_MESA" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ESTADO_ORDEN" EntityType="Self.ESTADO_ORDEN" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FACTURA" EntityType="Self.FACTURA" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FACTURA_TIPO_PAGO" EntityType="Self.FACTURA_TIPO_PAGO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MESA" EntityType="Self.MESA" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MESA_USUARIO" EntityType="Self.MESA_USUARIO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ORDEN" EntityType="Self.ORDEN" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PRODUCTO" EntityType="Self.PRODUCTO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PRODUCTO_RESTAURANTE" EntityType="Self.PRODUCTO_RESTAURANTE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RESTAURANTE" EntityType="Self.RESTAURANTE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ROL" EntityType="Self.ROL" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TIPO_PAGO" EntityType="Self.TIPO_PAGO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="USUARIO" EntityType="Self.USUARIO" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_DETALLE_ORDEN_ORDEN" Association="Self.FK_DETALLE_ORDEN_ORDEN">
+            <End Role="ORDEN" EntitySet="ORDEN" />
+            <End Role="DETALLE_ORDEN" EntitySet="DETALLE_ORDEN" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DETALLE_ORDEN_PRODUCTO" Association="Self.FK_DETALLE_ORDEN_PRODUCTO">
+            <End Role="PRODUCTO" EntitySet="PRODUCTO" />
+            <End Role="DETALLE_ORDEN" EntitySet="DETALLE_ORDEN" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FACTURA_MESA" Association="Self.FK_FACTURA_MESA">
+            <End Role="MESA" EntitySet="MESA" />
+            <End Role="FACTURA" EntitySet="FACTURA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FACTURA_ORDEN" Association="Self.FK_FACTURA_ORDEN">
+            <End Role="ORDEN" EntitySet="ORDEN" />
+            <End Role="FACTURA" EntitySet="FACTURA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FACTURA_TIPO_PAGO_FACTURA" Association="Self.FK_FACTURA_TIPO_PAGO_FACTURA">
+            <End Role="FACTURA" EntitySet="FACTURA" />
+            <End Role="FACTURA_TIPO_PAGO" EntitySet="FACTURA_TIPO_PAGO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FACTURA_TIPO_PAGO_TIPO_PAGO" Association="Self.FK_FACTURA_TIPO_PAGO_TIPO_PAGO">
+            <End Role="TIPO_PAGO" EntitySet="TIPO_PAGO" />
+            <End Role="FACTURA_TIPO_PAGO" EntitySet="FACTURA_TIPO_PAGO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MESA_ESTADO_MESA" Association="Self.FK_MESA_ESTADO_MESA">
+            <End Role="ESTADO_MESA" EntitySet="ESTADO_MESA" />
+            <End Role="MESA" EntitySet="MESA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MESA_RESTAURANTE" Association="Self.FK_MESA_RESTAURANTE">
+            <End Role="RESTAURANTE" EntitySet="RESTAURANTE" />
+            <End Role="MESA" EntitySet="MESA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MESA_USUARIO_MESA" Association="Self.FK_MESA_USUARIO_MESA">
+            <End Role="MESA" EntitySet="MESA" />
+            <End Role="MESA_USUARIO" EntitySet="MESA_USUARIO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MESA_USUARIO_USUARIO" Association="Self.FK_MESA_USUARIO_USUARIO">
+            <End Role="USUARIO" EntitySet="USUARIO" />
+            <End Role="MESA_USUARIO" EntitySet="MESA_USUARIO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ORDEN_ESTADO_ORDEN" Association="Self.FK_ORDEN_ESTADO_ORDEN">
+            <End Role="ESTADO_ORDEN" EntitySet="ESTADO_ORDEN" />
+            <End Role="ORDEN" EntitySet="ORDEN" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ORDEN_MESA" Association="Self.FK_ORDEN_MESA">
+            <End Role="MESA" EntitySet="MESA" />
+            <End Role="ORDEN" EntitySet="ORDEN" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ORDEN_USUARIO" Association="Self.FK_ORDEN_USUARIO">
+            <End Role="USUARIO" EntitySet="USUARIO" />
+            <End Role="ORDEN" EntitySet="ORDEN" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PRODUCTO_CATEGORIA_PRODUCTO" Association="Self.FK_PRODUCTO_CATEGORIA_PRODUCTO">
+            <End Role="CATEGORIA_PRODUCTO" EntitySet="CATEGORIA_PRODUCTO" />
+            <End Role="PRODUCTO" EntitySet="PRODUCTO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PRODUCTO_RESTAURANTE_PRODUCTO" Association="Self.FK_PRODUCTO_RESTAURANTE_PRODUCTO">
+            <End Role="PRODUCTO" EntitySet="PRODUCTO" />
+            <End Role="PRODUCTO_RESTAURANTE" EntitySet="PRODUCTO_RESTAURANTE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PRODUCTO_RESTAURANTE_RESTAURANTE" Association="Self.FK_PRODUCTO_RESTAURANTE_RESTAURANTE">
+            <End Role="RESTAURANTE" EntitySet="RESTAURANTE" />
+            <End Role="PRODUCTO_RESTAURANTE" EntitySet="PRODUCTO_RESTAURANTE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_USUARIO_RESTAURANTE" Association="Self.FK_USUARIO_RESTAURANTE">
+            <End Role="RESTAURANTE" EntitySet="RESTAURANTE" />
+            <End Role="USUARIO" EntitySet="USUARIO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_USUARIO_ROL" Association="Self.FK_USUARIO_ROL">
+            <End Role="ROL" EntitySet="ROL" />
+            <End Role="USUARIO" EntitySet="USUARIO" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="TALIS_FAST_FOODModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="CATEGORIA_PRODUCTO">
+          <Key>
+            <PropertyRef Name="ID_CATEGORIA" />
+          </Key>
+          <Property Name="ID_CATEGORIA" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NOMBRE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="PRODUCTO" Relationship="Self.FK_PRODUCTO_CATEGORIA_PRODUCTO" FromRole="CATEGORIA_PRODUCTO" ToRole="PRODUCTO" />
+        </EntityType>
+        <EntityType Name="DETALLE_ORDEN">
+          <Key>
+            <PropertyRef Name="ID_ORDEN" />
+            <PropertyRef Name="ID_PRODUCTO" />
+          </Key>
+          <Property Name="ID_ORDEN" Type="Int32" Nullable="false" />
+          <Property Name="ID_PRODUCTO" Type="Int32" Nullable="false" />
+          <Property Name="CANTIDAD" Type="Int32" Nullable="false" />
+          <Property Name="MONTO_UNIDAD" Type="Double" Nullable="false" />
+          <Property Name="NOTA" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="ORDEN" Relationship="Self.FK_DETALLE_ORDEN_ORDEN" FromRole="DETALLE_ORDEN" ToRole="ORDEN" />
+          <NavigationProperty Name="PRODUCTO" Relationship="Self.FK_DETALLE_ORDEN_PRODUCTO" FromRole="DETALLE_ORDEN" ToRole="PRODUCTO" />
+        </EntityType>
+        <EntityType Name="ESTADO_MESA">
+          <Key>
+            <PropertyRef Name="ID_ESTADO_MESA" />
+          </Key>
+          <Property Name="ID_ESTADO_MESA" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ESTADO" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="MESA" Relationship="Self.FK_MESA_ESTADO_MESA" FromRole="ESTADO_MESA" ToRole="MESA" />
+        </EntityType>
+        <EntityType Name="ESTADO_ORDEN">
+          <Key>
+            <PropertyRef Name="ID_ESTADO_ORDEN" />
+          </Key>
+          <Property Name="ID_ESTADO_ORDEN" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ESTADO" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="ORDEN" Relationship="Self.FK_ORDEN_ESTADO_ORDEN" FromRole="ESTADO_ORDEN" ToRole="ORDEN" />
+        </EntityType>
+        <EntityType Name="FACTURA">
+          <Key>
+            <PropertyRef Name="ID_FACTURA" />
+          </Key>
+          <Property Name="ID_FACTURA" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SUBTOTAL" Type="Double" Nullable="false" />
+          <Property Name="IMPUESTO" Type="Double" Nullable="false" />
+          <Property Name="TOTAL" Type="Double" Nullable="false" />
+          <Property Name="FECHA" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="ID_ORDEN" Type="Int32" Nullable="false" />
+          <Property Name="ID_MESA" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="MESA" Relationship="Self.FK_FACTURA_MESA" FromRole="FACTURA" ToRole="MESA" />
+          <NavigationProperty Name="ORDEN" Relationship="Self.FK_FACTURA_ORDEN" FromRole="FACTURA" ToRole="ORDEN" />
+          <NavigationProperty Name="FACTURA_TIPO_PAGO" Relationship="Self.FK_FACTURA_TIPO_PAGO_FACTURA" FromRole="FACTURA" ToRole="FACTURA_TIPO_PAGO" />
+          <Property Name="ID_USUARIO" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="FACTURA_TIPO_PAGO">
+          <Key>
+            <PropertyRef Name="ID_FACTURA" />
+            <PropertyRef Name="ID_TIPO_PAGO" />
+          </Key>
+          <Property Name="ID_FACTURA" Type="Int32" Nullable="false" />
+          <Property Name="ID_TIPO_PAGO" Type="Int32" Nullable="false" />
+          <Property Name="MONTO" Type="Double" Nullable="false" />
+          <NavigationProperty Name="FACTURA" Relationship="Self.FK_FACTURA_TIPO_PAGO_FACTURA" FromRole="FACTURA_TIPO_PAGO" ToRole="FACTURA" />
+          <NavigationProperty Name="TIPO_PAGO" Relationship="Self.FK_FACTURA_TIPO_PAGO_TIPO_PAGO" FromRole="FACTURA_TIPO_PAGO" ToRole="TIPO_PAGO" />
+        </EntityType>
+        <EntityType Name="MESA">
+          <Key>
+            <PropertyRef Name="ID_MESA" />
+          </Key>
+          <Property Name="ID_MESA" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="COD_MESA" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CAPACIDAD" Type="Int32" Nullable="false" />
+          <Property Name="ID_ESTADO_MESA" Type="Int32" Nullable="false" />
+          <Property Name="ID_RESTAURANTE" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ESTADO_MESA" Relationship="Self.FK_MESA_ESTADO_MESA" FromRole="MESA" ToRole="ESTADO_MESA" />
+          <NavigationProperty Name="FACTURA" Relationship="Self.FK_FACTURA_MESA" FromRole="MESA" ToRole="FACTURA" />
+          <NavigationProperty Name="RESTAURANTE" Relationship="Self.FK_MESA_RESTAURANTE" FromRole="MESA" ToRole="RESTAURANTE" />
+          <NavigationProperty Name="ORDEN" Relationship="Self.FK_ORDEN_MESA" FromRole="MESA" ToRole="ORDEN" />
+          <NavigationProperty Name="USUARIO" Relationship="Self.MESA_USUARIO" FromRole="MESA" ToRole="USUARIO" />
+        </EntityType>
+        <EntityType Name="ORDEN">
+          <Key>
+            <PropertyRef Name="ID_ORDEN" />
+          </Key>
+          <Property Name="ID_ORDEN" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_USUARIO" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ESTADO_ORDEN" Type="Int32" Nullable="false" />
+          <Property Name="FECHA" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="ID_MESA" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="DETALLE_ORDEN" Relationship="Self.FK_DETALLE_ORDEN_ORDEN" FromRole="ORDEN" ToRole="DETALLE_ORDEN" />
+          <NavigationProperty Name="ESTADO_ORDEN1" Relationship="Self.FK_ORDEN_ESTADO_ORDEN" FromRole="ORDEN" ToRole="ESTADO_ORDEN" />
+          <NavigationProperty Name="FACTURA" Relationship="Self.FK_FACTURA_ORDEN" FromRole="ORDEN" ToRole="FACTURA" />
+          <NavigationProperty Name="MESA" Relationship="Self.FK_ORDEN_MESA" FromRole="ORDEN" ToRole="MESA" />
+          <NavigationProperty Name="USUARIO" Relationship="Self.FK_ORDEN_USUARIO" FromRole="ORDEN" ToRole="USUARIO" />
+          <Property Name="ID_FACTURA" Type="Int32" />
+        </EntityType>
+        <EntityType Name="PRODUCTO">
+          <Key>
+            <PropertyRef Name="ID_PRODUCTO" />
+          </Key>
+          <Property Name="ID_PRODUCTO" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NOMBRE" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DESCRIPCION" Type="String" MaxLength="300" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="INGREDIENTES" Type="String" MaxLength="300" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PRECIO" Type="Double" Nullable="false" />
+          <Property Name="ESTADO" Type="Boolean" Nullable="false" />
+          <Property Name="FOTOGRAFIA" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ID_CATEGORIA" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="CATEGORIA_PRODUCTO" Relationship="Self.FK_PRODUCTO_CATEGORIA_PRODUCTO" FromRole="PRODUCTO" ToRole="CATEGORIA_PRODUCTO" />
+          <NavigationProperty Name="DETALLE_ORDEN" Relationship="Self.FK_DETALLE_ORDEN_PRODUCTO" FromRole="PRODUCTO" ToRole="DETALLE_ORDEN" />
+          <NavigationProperty Name="RESTAURANTE" Relationship="Self.PRODUCTO_RESTAURANTE" FromRole="PRODUCTO" ToRole="RESTAURANTE" />
+          <Property Name="ID_ESTADO" Type="Int32" />
+        </EntityType>
+        <EntityType Name="RESTAURANTE">
+          <Key>
+            <PropertyRef Name="ID_RESTAURANTE" />
+          </Key>
+          <Property Name="ID_RESTAURANTE" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NOMBRE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="UBICACION" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="MESA" Relationship="Self.FK_MESA_RESTAURANTE" FromRole="RESTAURANTE" ToRole="MESA" />
+          <NavigationProperty Name="USUARIO" Relationship="Self.FK_USUARIO_RESTAURANTE" FromRole="RESTAURANTE" ToRole="USUARIO" />
+          <NavigationProperty Name="PRODUCTO" Relationship="Self.PRODUCTO_RESTAURANTE" FromRole="RESTAURANTE" ToRole="PRODUCTO" />
+        </EntityType>
+        <EntityType Name="ROL">
+          <Key>
+            <PropertyRef Name="ID_ROL" />
+          </Key>
+          <Property Name="ID_ROL" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TIPO_ROL" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="USUARIO" Relationship="Self.FK_USUARIO_ROL" FromRole="ROL" ToRole="USUARIO" />
+        </EntityType>
+        <EntityType Name="TIPO_PAGO">
+          <Key>
+            <PropertyRef Name="ID_TIPO_PAGO" />
+          </Key>
+          <Property Name="ID_TIPO_PAGO" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DESCRIPCION" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="FACTURA_TIPO_PAGO" Relationship="Self.FK_FACTURA_TIPO_PAGO_TIPO_PAGO" FromRole="TIPO_PAGO" ToRole="FACTURA_TIPO_PAGO" />
+        </EntityType>
+        <EntityType Name="USUARIO">
+          <Key>
+            <PropertyRef Name="ID_USUARIO" />
+          </Key>
+          <Property Name="ID_USUARIO" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="NOMBRE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PRIMER_APELLIDO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="SEGUNDO_APELLIDO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TELEFONO" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="EMAIL" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CLAVE" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ID_ROL" Type="Int32" Nullable="false" />
+          <Property Name="ID_RESTAURANTE" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ORDEN" Relationship="Self.FK_ORDEN_USUARIO" FromRole="USUARIO" ToRole="ORDEN" />
+          <NavigationProperty Name="RESTAURANTE" Relationship="Self.FK_USUARIO_RESTAURANTE" FromRole="USUARIO" ToRole="RESTAURANTE" />
+          <NavigationProperty Name="ROL" Relationship="Self.FK_USUARIO_ROL" FromRole="USUARIO" ToRole="ROL" />
+          <NavigationProperty Name="MESA" Relationship="Self.MESA_USUARIO" FromRole="USUARIO" ToRole="MESA" />
+          <Property Name="ESTADO" Type="Int32" />
+        </EntityType>
+        <Association Name="FK_PRODUCTO_CATEGORIA_PRODUCTO">
+          <End Role="CATEGORIA_PRODUCTO" Type="Self.CATEGORIA_PRODUCTO" Multiplicity="1" />
+          <End Role="PRODUCTO" Type="Self.PRODUCTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CATEGORIA_PRODUCTO">
+              <PropertyRef Name="ID_CATEGORIA" />
+            </Principal>
+            <Dependent Role="PRODUCTO">
+              <PropertyRef Name="ID_CATEGORIA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DETALLE_ORDEN_ORDEN">
+          <End Role="ORDEN" Type="Self.ORDEN" Multiplicity="1" />
+          <End Role="DETALLE_ORDEN" Type="Self.DETALLE_ORDEN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ORDEN">
+              <PropertyRef Name="ID_ORDEN" />
+            </Principal>
+            <Dependent Role="DETALLE_ORDEN">
+              <PropertyRef Name="ID_ORDEN" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DETALLE_ORDEN_PRODUCTO">
+          <End Role="PRODUCTO" Type="Self.PRODUCTO" Multiplicity="1" />
+          <End Role="DETALLE_ORDEN" Type="Self.DETALLE_ORDEN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PRODUCTO">
+              <PropertyRef Name="ID_PRODUCTO" />
+            </Principal>
+            <Dependent Role="DETALLE_ORDEN">
+              <PropertyRef Name="ID_PRODUCTO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MESA_ESTADO_MESA">
+          <End Role="ESTADO_MESA" Type="Self.ESTADO_MESA" Multiplicity="1" />
+          <End Role="MESA" Type="Self.MESA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ESTADO_MESA">
+              <PropertyRef Name="ID_ESTADO_MESA" />
+            </Principal>
+            <Dependent Role="MESA">
+              <PropertyRef Name="ID_ESTADO_MESA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ORDEN_ESTADO_ORDEN">
+          <End Role="ESTADO_ORDEN" Type="Self.ESTADO_ORDEN" Multiplicity="1" />
+          <End Role="ORDEN" Type="Self.ORDEN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ESTADO_ORDEN">
+              <PropertyRef Name="ID_ESTADO_ORDEN" />
+            </Principal>
+            <Dependent Role="ORDEN">
+              <PropertyRef Name="ESTADO_ORDEN" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FACTURA_MESA">
+          <End Role="MESA" Type="Self.MESA" Multiplicity="1" />
+          <End Role="FACTURA" Type="Self.FACTURA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MESA">
+              <PropertyRef Name="ID_MESA" />
+            </Principal>
+            <Dependent Role="FACTURA">
+              <PropertyRef Name="ID_MESA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FACTURA_ORDEN">
+          <End Role="ORDEN" Type="Self.ORDEN" Multiplicity="1" />
+          <End Role="FACTURA" Type="Self.FACTURA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ORDEN">
+              <PropertyRef Name="ID_ORDEN" />
+            </Principal>
+            <Dependent Role="FACTURA">
+              <PropertyRef Name="ID_ORDEN" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FACTURA_TIPO_PAGO_FACTURA">
+          <End Role="FACTURA" Type="Self.FACTURA" Multiplicity="1" />
+          <End Role="FACTURA_TIPO_PAGO" Type="Self.FACTURA_TIPO_PAGO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FACTURA">
+              <PropertyRef Name="ID_FACTURA" />
+            </Principal>
+            <Dependent Role="FACTURA_TIPO_PAGO">
+              <PropertyRef Name="ID_FACTURA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FACTURA_TIPO_PAGO_TIPO_PAGO">
+          <End Role="TIPO_PAGO" Type="Self.TIPO_PAGO" Multiplicity="1" />
+          <End Role="FACTURA_TIPO_PAGO" Type="Self.FACTURA_TIPO_PAGO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TIPO_PAGO">
+              <PropertyRef Name="ID_TIPO_PAGO" />
+            </Principal>
+            <Dependent Role="FACTURA_TIPO_PAGO">
+              <PropertyRef Name="ID_TIPO_PAGO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MESA_RESTAURANTE">
+          <End Role="RESTAURANTE" Type="Self.RESTAURANTE" Multiplicity="1" />
+          <End Role="MESA" Type="Self.MESA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RESTAURANTE">
+              <PropertyRef Name="ID_RESTAURANTE" />
+            </Principal>
+            <Dependent Role="MESA">
+              <PropertyRef Name="ID_RESTAURANTE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ORDEN_MESA">
+          <End Role="MESA" Type="Self.MESA" Multiplicity="1" />
+          <End Role="ORDEN" Type="Self.ORDEN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MESA">
+              <PropertyRef Name="ID_MESA" />
+            </Principal>
+            <Dependent Role="ORDEN">
+              <PropertyRef Name="ID_MESA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ORDEN_USUARIO">
+          <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="1" />
+          <End Role="ORDEN" Type="Self.ORDEN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USUARIO">
+              <PropertyRef Name="ID_USUARIO" />
+            </Principal>
+            <Dependent Role="ORDEN">
+              <PropertyRef Name="ID_USUARIO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_USUARIO_RESTAURANTE">
+          <End Role="RESTAURANTE" Type="Self.RESTAURANTE" Multiplicity="1" />
+          <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RESTAURANTE">
+              <PropertyRef Name="ID_RESTAURANTE" />
+            </Principal>
+            <Dependent Role="USUARIO">
+              <PropertyRef Name="ID_RESTAURANTE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_USUARIO_ROL">
+          <End Role="ROL" Type="Self.ROL" Multiplicity="1" />
+          <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ROL">
+              <PropertyRef Name="ID_ROL" />
+            </Principal>
+            <Dependent Role="USUARIO">
+              <PropertyRef Name="ID_ROL" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="MESA_USUARIO">
+          <End Role="MESA" Type="Self.MESA" Multiplicity="*" />
+          <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="*" />
+        </Association>
+        <Association Name="PRODUCTO_RESTAURANTE">
+          <End Role="PRODUCTO" Type="Self.PRODUCTO" Multiplicity="*" />
+          <End Role="RESTAURANTE" Type="Self.RESTAURANTE" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="TALIS_FAST_FOODEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="CATEGORIA_PRODUCTO" EntityType="Self.CATEGORIA_PRODUCTO" />
+          <EntitySet Name="DETALLE_ORDEN" EntityType="Self.DETALLE_ORDEN" />
+          <EntitySet Name="ESTADO_MESA" EntityType="Self.ESTADO_MESA" />
+          <EntitySet Name="ESTADO_ORDEN" EntityType="Self.ESTADO_ORDEN" />
+          <EntitySet Name="FACTURA" EntityType="Self.FACTURA" />
+          <EntitySet Name="FACTURA_TIPO_PAGO" EntityType="Self.FACTURA_TIPO_PAGO" />
+          <EntitySet Name="MESA" EntityType="Self.MESA" />
+          <EntitySet Name="ORDEN" EntityType="Self.ORDEN" />
+          <EntitySet Name="PRODUCTO" EntityType="Self.PRODUCTO" />
+          <EntitySet Name="RESTAURANTE" EntityType="Self.RESTAURANTE" />
+          <EntitySet Name="ROL" EntityType="Self.ROL" />
+          <EntitySet Name="TIPO_PAGO" EntityType="Self.TIPO_PAGO" />
+          <EntitySet Name="USUARIO" EntityType="Self.USUARIO" />
+          <AssociationSet Name="FK_PRODUCTO_CATEGORIA_PRODUCTO" Association="Self.FK_PRODUCTO_CATEGORIA_PRODUCTO">
+            <End Role="CATEGORIA_PRODUCTO" EntitySet="CATEGORIA_PRODUCTO" />
+            <End Role="PRODUCTO" EntitySet="PRODUCTO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DETALLE_ORDEN_ORDEN" Association="Self.FK_DETALLE_ORDEN_ORDEN">
+            <End Role="ORDEN" EntitySet="ORDEN" />
+            <End Role="DETALLE_ORDEN" EntitySet="DETALLE_ORDEN" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DETALLE_ORDEN_PRODUCTO" Association="Self.FK_DETALLE_ORDEN_PRODUCTO">
+            <End Role="PRODUCTO" EntitySet="PRODUCTO" />
+            <End Role="DETALLE_ORDEN" EntitySet="DETALLE_ORDEN" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MESA_ESTADO_MESA" Association="Self.FK_MESA_ESTADO_MESA">
+            <End Role="ESTADO_MESA" EntitySet="ESTADO_MESA" />
+            <End Role="MESA" EntitySet="MESA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ORDEN_ESTADO_ORDEN" Association="Self.FK_ORDEN_ESTADO_ORDEN">
+            <End Role="ESTADO_ORDEN" EntitySet="ESTADO_ORDEN" />
+            <End Role="ORDEN" EntitySet="ORDEN" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FACTURA_MESA" Association="Self.FK_FACTURA_MESA">
+            <End Role="MESA" EntitySet="MESA" />
+            <End Role="FACTURA" EntitySet="FACTURA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FACTURA_ORDEN" Association="Self.FK_FACTURA_ORDEN">
+            <End Role="ORDEN" EntitySet="ORDEN" />
+            <End Role="FACTURA" EntitySet="FACTURA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FACTURA_TIPO_PAGO_FACTURA" Association="Self.FK_FACTURA_TIPO_PAGO_FACTURA">
+            <End Role="FACTURA" EntitySet="FACTURA" />
+            <End Role="FACTURA_TIPO_PAGO" EntitySet="FACTURA_TIPO_PAGO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FACTURA_TIPO_PAGO_TIPO_PAGO" Association="Self.FK_FACTURA_TIPO_PAGO_TIPO_PAGO">
+            <End Role="TIPO_PAGO" EntitySet="TIPO_PAGO" />
+            <End Role="FACTURA_TIPO_PAGO" EntitySet="FACTURA_TIPO_PAGO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MESA_RESTAURANTE" Association="Self.FK_MESA_RESTAURANTE">
+            <End Role="RESTAURANTE" EntitySet="RESTAURANTE" />
+            <End Role="MESA" EntitySet="MESA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ORDEN_MESA" Association="Self.FK_ORDEN_MESA">
+            <End Role="MESA" EntitySet="MESA" />
+            <End Role="ORDEN" EntitySet="ORDEN" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ORDEN_USUARIO" Association="Self.FK_ORDEN_USUARIO">
+            <End Role="USUARIO" EntitySet="USUARIO" />
+            <End Role="ORDEN" EntitySet="ORDEN" />
+          </AssociationSet>
+          <AssociationSet Name="FK_USUARIO_RESTAURANTE" Association="Self.FK_USUARIO_RESTAURANTE">
+            <End Role="RESTAURANTE" EntitySet="RESTAURANTE" />
+            <End Role="USUARIO" EntitySet="USUARIO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_USUARIO_ROL" Association="Self.FK_USUARIO_ROL">
+            <End Role="ROL" EntitySet="ROL" />
+            <End Role="USUARIO" EntitySet="USUARIO" />
+          </AssociationSet>
+          <AssociationSet Name="MESA_USUARIO" Association="Self.MESA_USUARIO">
+            <End Role="MESA" EntitySet="MESA" />
+            <End Role="USUARIO" EntitySet="USUARIO" />
+          </AssociationSet>
+          <AssociationSet Name="PRODUCTO_RESTAURANTE" Association="Self.PRODUCTO_RESTAURANTE">
+            <End Role="PRODUCTO" EntitySet="PRODUCTO" />
+            <End Role="RESTAURANTE" EntitySet="RESTAURANTE" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="TALIS_FAST_FOODModelStoreContainer" CdmEntityContainer="TALIS_FAST_FOODEntities">
+          <EntitySetMapping Name="CATEGORIA_PRODUCTO">
+            <EntityTypeMapping TypeName="TALIS_FAST_FOODModel.CATEGORIA_PRODUCTO">
+              <MappingFragment StoreEntitySet="CATEGORIA_PRODUCTO">
+                <ScalarProperty Name="ID_CATEGORIA" ColumnName="ID_CATEGORIA" />
+                <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DETALLE_ORDEN">
+            <EntityTypeMapping TypeName="TALIS_FAST_FOODModel.DETALLE_ORDEN">
+              <MappingFragment StoreEntitySet="DETALLE_ORDEN">
+                <ScalarProperty Name="ID_ORDEN" ColumnName="ID_ORDEN" />
+                <ScalarProperty Name="ID_PRODUCTO" ColumnName="ID_PRODUCTO" />
+                <ScalarProperty Name="CANTIDAD" ColumnName="CANTIDAD" />
+                <ScalarProperty Name="MONTO_UNIDAD" ColumnName="MONTO_UNIDAD" />
+                <ScalarProperty Name="NOTA" ColumnName="NOTA" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ESTADO_MESA">
+            <EntityTypeMapping TypeName="TALIS_FAST_FOODModel.ESTADO_MESA">
+              <MappingFragment StoreEntitySet="ESTADO_MESA">
+                <ScalarProperty Name="ID_ESTADO_MESA" ColumnName="ID_ESTADO_MESA" />
+                <ScalarProperty Name="ESTADO" ColumnName="ESTADO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ESTADO_ORDEN">
+            <EntityTypeMapping TypeName="TALIS_FAST_FOODModel.ESTADO_ORDEN">
+              <MappingFragment StoreEntitySet="ESTADO_ORDEN">
+                <ScalarProperty Name="ID_ESTADO_ORDEN" ColumnName="ID_ESTADO_ORDEN" />
+                <ScalarProperty Name="ESTADO" ColumnName="ESTADO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FACTURA">
+            <EntityTypeMapping TypeName="TALIS_FAST_FOODModel.FACTURA">
+              <MappingFragment StoreEntitySet="FACTURA">
+                <ScalarProperty Name="ID_USUARIO" ColumnName="ID_USUARIO" />
+                <ScalarProperty Name="ID_FACTURA" ColumnName="ID_FACTURA" />
+                <ScalarProperty Name="SUBTOTAL" ColumnName="SUBTOTAL" />
+                <ScalarProperty Name="IMPUESTO" ColumnName="IMPUESTO" />
+                <ScalarProperty Name="TOTAL" ColumnName="TOTAL" />
+                <ScalarProperty Name="FECHA" ColumnName="FECHA" />
+                <ScalarProperty Name="ID_ORDEN" ColumnName="ID_ORDEN" />
+                <ScalarProperty Name="ID_MESA" ColumnName="ID_MESA" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FACTURA_TIPO_PAGO">
+            <EntityTypeMapping TypeName="TALIS_FAST_FOODModel.FACTURA_TIPO_PAGO">
+              <MappingFragment StoreEntitySet="FACTURA_TIPO_PAGO">
+                <ScalarProperty Name="ID_FACTURA" ColumnName="ID_FACTURA" />
+                <ScalarProperty Name="ID_TIPO_PAGO" ColumnName="ID_TIPO_PAGO" />
+                <ScalarProperty Name="MONTO" ColumnName="MONTO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MESA">
+            <EntityTypeMapping TypeName="TALIS_FAST_FOODModel.MESA">
+              <MappingFragment StoreEntitySet="MESA">
+                <ScalarProperty Name="ID_MESA" ColumnName="ID_MESA" />
+                <ScalarProperty Name="COD_MESA" ColumnName="COD_MESA" />
+                <ScalarProperty Name="CAPACIDAD" ColumnName="CAPACIDAD" />
+                <ScalarProperty Name="ID_ESTADO_MESA" ColumnName="ID_ESTADO_MESA" />
+                <ScalarProperty Name="ID_RESTAURANTE" ColumnName="ID_RESTAURANTE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ORDEN">
+            <EntityTypeMapping TypeName="TALIS_FAST_FOODModel.ORDEN">
+              <MappingFragment StoreEntitySet="ORDEN">
+                <ScalarProperty Name="ID_FACTURA" ColumnName="ID_FACTURA" />
+                <ScalarProperty Name="ID_ORDEN" ColumnName="ID_ORDEN" />
+                <ScalarProperty Name="ID_USUARIO" ColumnName="ID_USUARIO" />
+                <ScalarProperty Name="ESTADO_ORDEN" ColumnName="ESTADO_ORDEN" />
+                <ScalarProperty Name="FECHA" ColumnName="FECHA" />
+                <ScalarProperty Name="ID_MESA" ColumnName="ID_MESA" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PRODUCTO">
+            <EntityTypeMapping TypeName="TALIS_FAST_FOODModel.PRODUCTO">
+              <MappingFragment StoreEntitySet="PRODUCTO">
+                <ScalarProperty Name="ID_ESTADO" ColumnName="ID_ESTADO" />
+                <ScalarProperty Name="ID_PRODUCTO" ColumnName="ID_PRODUCTO" />
+                <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+                <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
+                <ScalarProperty Name="INGREDIENTES" ColumnName="INGREDIENTES" />
+                <ScalarProperty Name="PRECIO" ColumnName="PRECIO" />
+                <ScalarProperty Name="ESTADO" ColumnName="ESTADO" />
+                <ScalarProperty Name="FOTOGRAFIA" ColumnName="FOTOGRAFIA" />
+                <ScalarProperty Name="ID_CATEGORIA" ColumnName="ID_CATEGORIA" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RESTAURANTE">
+            <EntityTypeMapping TypeName="TALIS_FAST_FOODModel.RESTAURANTE">
+              <MappingFragment StoreEntitySet="RESTAURANTE">
+                <ScalarProperty Name="ID_RESTAURANTE" ColumnName="ID_RESTAURANTE" />
+                <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+                <ScalarProperty Name="UBICACION" ColumnName="UBICACION" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ROL">
+            <EntityTypeMapping TypeName="TALIS_FAST_FOODModel.ROL">
+              <MappingFragment StoreEntitySet="ROL">
+                <ScalarProperty Name="ID_ROL" ColumnName="ID_ROL" />
+                <ScalarProperty Name="TIPO_ROL" ColumnName="TIPO_ROL" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TIPO_PAGO">
+            <EntityTypeMapping TypeName="TALIS_FAST_FOODModel.TIPO_PAGO">
+              <MappingFragment StoreEntitySet="TIPO_PAGO">
+                <ScalarProperty Name="ID_TIPO_PAGO" ColumnName="ID_TIPO_PAGO" />
+                <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="USUARIO">
+            <EntityTypeMapping TypeName="TALIS_FAST_FOODModel.USUARIO">
+              <MappingFragment StoreEntitySet="USUARIO">
+                <ScalarProperty Name="ESTADO" ColumnName="ESTADO" />
+                <ScalarProperty Name="ID_USUARIO" ColumnName="ID_USUARIO" />
+                <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+                <ScalarProperty Name="PRIMER_APELLIDO" ColumnName="PRIMER_APELLIDO" />
+                <ScalarProperty Name="SEGUNDO_APELLIDO" ColumnName="SEGUNDO_APELLIDO" />
+                <ScalarProperty Name="TELEFONO" ColumnName="TELEFONO" />
+                <ScalarProperty Name="EMAIL" ColumnName="EMAIL" />
+                <ScalarProperty Name="CLAVE" ColumnName="CLAVE" />
+                <ScalarProperty Name="ID_ROL" ColumnName="ID_ROL" />
+                <ScalarProperty Name="ID_RESTAURANTE" ColumnName="ID_RESTAURANTE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="MESA_USUARIO" TypeName="TALIS_FAST_FOODModel.MESA_USUARIO" StoreEntitySet="MESA_USUARIO">
+            <EndProperty Name="MESA">
+              <ScalarProperty Name="ID_MESA" ColumnName="ID_MESA" />
+            </EndProperty>
+            <EndProperty Name="USUARIO">
+              <ScalarProperty Name="ID_USUARIO" ColumnName="ID_USUARIO" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="PRODUCTO_RESTAURANTE" TypeName="TALIS_FAST_FOODModel.PRODUCTO_RESTAURANTE" StoreEntitySet="PRODUCTO_RESTAURANTE">
+            <EndProperty Name="PRODUCTO">
+              <ScalarProperty Name="ID_PRODUCTO" ColumnName="ID_PRODUCTO" />
+            </EndProperty>
+            <EndProperty Name="RESTAURANTE">
+              <ScalarProperty Name="ID_RESTAURANTE" ColumnName="ID_RESTAURANTE" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

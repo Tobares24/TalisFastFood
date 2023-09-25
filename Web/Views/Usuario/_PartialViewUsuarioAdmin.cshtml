@@ -1,0 +1,15 @@
+﻿@model IEnumerable<Infraestructure.Models.USUARIO>
+
+@foreach (var item in Model)
+{
+    <tr>
+        <th scope="row" class="w-25"> @Html.DisplayFor(modelItem => item.ID_USUARIO)</th>
+        <td class="pt-4">@Html.DisplayFor(modelItem => item.NOMBRE)</td>
+        <td class="pt-4">@Html.DisplayFor(modelItem => item.ROL.TIPO_ROL)</td>
+        <td class="d-flex justify-content-evenly text-center">
+            <a href="@Url.Action("DetalleUsuario", "Usuario", new {id = item.ID_USUARIO})" class="btn btn-primary btnAccion"><i class="fa-solid fa-circle-info"></i> Detalle</a>
+            <a href="@Url.Action("EditarUsuario", "Usuario", new {id = item.ID_USUARIO})" class="btn btn-primary btnAccion"><i class="fa-solid fa-pen"></i> Editar</a>
+            <a href="@Url.Action("Eliminar", "#", "EliminarMesa")" class="btn btn-primary btnAccion"><i class="fa-solid fa-trash"></i> Eliminar</a>
+        </td>
+    </tr>
+}

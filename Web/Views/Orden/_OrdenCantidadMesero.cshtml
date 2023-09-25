@@ -1,0 +1,15 @@
+﻿@{
+    int cantidadProductos = Web.ViewModel.CarritoMesero.Instance.GetCountItems();
+}
+
+<a href="@Url.Action("IndexOrden", "Orden")" class="nav-link" style="display: flex; align-items: end; justify-content: end;">
+    <i class="fa-solid fa-cart-shopping" style="font-size: 25px;"></i>
+    <span class="badge text-bg-info" style="font-size: 12px;">@cantidadProductos</span>
+</a>
+
+@if (@ViewBag.NotificationCarrito != null)
+{
+    <script>
+        @Html.Raw(@ViewBag.NotificationCarrito);
+    </script>
+}

@@ -1,0 +1,53 @@
+﻿@model IEnumerable<Infraestructure.Models.PRODUCTO>
+@{
+    ViewBag.Title = "Listado de Productos";
+    Layout = "~/Views/Shared/_LayoutSidebar.cshtml";
+}
+
+<header style="padding: 20px; width: 100%; background-color: #F78935">
+    <h3 class="text-center text-white">Listado de Productos</h3>
+</header>
+
+<div class="text-center my-4" id="cantidadProductos">
+    @Html.Partial("_OrdenCantidad")
+</div>
+
+<div id="div-alert"></div>
+
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="col-lg-3 mb-4">
+            <div class="card text-center">
+                <img style="height: 200px; width: 100%;" src="@item.FOTOGRAFIA" class="card-img-top">
+                <div class="card-body">
+                    <h5 class="card-title">@item.CATEGORIA_PRODUCTO.NOMBRE</h5>
+                    <p class="card-text">@item.NOMBRE</p>
+                    <p class="card-text">₡@item.PRECIO.ToString("N")</p>
+                    @* Accion Orden *@
+                    <div>
+                        @Ajax.ActionLink("Agregar",
+                      "OrdenarProductoWaiter",
+                      "Orden",
+                      new
+                      {
+                          idProducto = item.ID_PRODUCTO,
+                          idMesa = @ViewContext.RouteData.Values["id"]
+                        },
+                      new AjaxOptions
+                      {
+                          UpdateTargetId = "cantidadProductos",
+                          InsertionMode = InsertionMode.Replace,
+                          HttpMethod = "GET",
+                      }, new { @class = "btn btn-primary", @id = "agregar" }
+                      )
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+@section Scripts{
+    @Scripts.Render("~/bundles/jqueryajax")
+}

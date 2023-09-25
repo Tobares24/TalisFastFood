@@ -1,0 +1,45 @@
+﻿
+@model IEnumerable<Infraestructure.Models.ORDEN>
+
+@{string FormatearFecha(DateTime fecha)
+    {
+        return fecha.ToString("dd/MM/yyyy");
+    } }
+
+<div id="resultado" class="row text-center pt-4">
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">@Html.DisplayNameFor(model => model.ID_ORDEN)</th>
+                <th scope="col">@Html.DisplayNameFor(model => model.USUARIO)</th>
+                <th scope="col">@Html.DisplayNameFor(model => model.ESTADO_ORDEN)</th>
+                <th scope="col">@Html.DisplayNameFor(model => model.FECHA)</th>
+                <th scope="col">Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <th scope="row" class="w-25">
+                        @Html.DisplayFor(modelItem => item.ID_ORDEN)
+                    </th>
+                    <td class="pt-4">
+                        @Html.DisplayFor(modelItem => item.USUARIO.NOMBRE)
+                    </td>
+                    <td class="pt-4">
+                        @Html.DisplayFor(modelItem => item.ESTADO_ORDEN1.ESTADO)
+                    </td>
+                    <td class="pt-4">
+                        @FormatearFecha(item.FECHA)
+                    </td>
+                    <td class="d-flex justify-content-evenly text-center">
+                        <a href="@Url.Action("DetalleOrden", "Orden", new {id = item.ID_ORDEN})" class="btn btn-primary btnAccion"><i class="fa-solid fa-circle-info"></i> Detalle</a>
+                        <a href="@Url.Action("Editar", "#", "EditarMesa")" class="btn btn-primary btnAccion"><i class="fa-solid fa-pen"></i> Editar</a>
+                        <a href="@Url.Action("Eliminar", "#", "EliminarMesa")" class="btn btn-primary btnAccion"><i class="fa-solid fa-trash"></i> Eliminar</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

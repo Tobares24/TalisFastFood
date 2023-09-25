@@ -1,0 +1,150 @@
+﻿@model Infraestructure.Models.ORDEN
+
+@{
+    ViewBag.Title = "Detalle Carrito";
+    Layout = "~/Views/Shared/_LayoutSidebar.cshtml";
+}
+
+<h2>Orden de Producto</h2>
+
+<div class="text-center">
+    @if (Web.Security.AutorizeView.IsUserInRole(new string[] { "Cliente" }))
+    {
+        <a href="@Url.Action("ListaProductos", "Orden")" class="botones mt-4 py-2" id="bg-link" style="width: 12%;">
+            <i class="fa-solid fa-arrow-left"></i><span> Regresar</span>
+        </a>
+    }
+    else if (Web.Security.AutorizeView.IsUserInRole(new string[] { "Mesero" }))
+    {
+        <a href="@Url.Action("ListProductsByRestaurants", "Orden")" class="botones mt-4 py-2" id="bg-link" style="width: 12%;">
+            <i class="fa-solid fa-arrow-left"></i><span> Regresar</span>
+        </a>
+    }
+</div>
+
+<div class="form-horizontal my-4">
+    @using (Html.BeginForm("Save", "Orden", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+        <div class="row">
+
+            <div class="col-md-8">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.FECHA, htmlAttributes: new { @class = "col-form-label" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(model => model.FECHA, htmlAttributes: new { @class = "form-control", @Value = DateTime.Now.ToString("yyyy-MM-dd"), @readonly = "readonly" })
+                        @Html.ValidationMessageFor(model => model.FECHA, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            @if (Web.Security.AutorizeView.IsUserInRole(new string[] { "Mesero" }))
+            {
+                <div class="col-md-6">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.ID_USUARIO, htmlAttributes: new { @class = "col-form-label" })
+                        <div class="col-md-12">
+                            @Html.DropDownListFor(model => model.ID_USUARIO, (SelectList)ViewBag.Clientes, " Seleccione un cliente", htmlAttributes: new { @class = "form-select form-control" })
+                            @Html.ValidationMessageFor(model => model.ID_USUARIO, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+
+        <hr /><span class="glyphicons glyphicons-hand-left"></span>
+
+        <div id="resultadoDetalle">
+            @if (Web.Security.AutorizeView.IsUserInRole(new string[] { "Cliente" }))
+            {
+                if (Web.ViewModel.Carrito.Instance.Items.Count() > 0)
+                {
+                    @Html.Partial("_DetalleOrden",
+                    (List<Web.ViewModel.ViewModelOrdenDetalle>)ViewBag.DetalleOrden
+                   )
+                }
+                else
+                {
+                    <div class="alert alert-danger d-flex align-items-center" role="alert">
+                        La orden no tiene productos asignados
+                    </div>
+                }
+            }
+            else if (Web.Security.AutorizeView.IsUserInRole(new string[] { "Mesero" }))
+            {
+                if (Web.ViewModel.CarritoMesero.Instance.Items.Count() > 0)
+                {
+                    @Html.Partial("_DetalleOrdenMesero",
+                    (List<Web.ViewModel.ViewModelOrdenDetalle>)ViewBag.DetalleOrdenMesero
+                   )
+                }
+                else
+                {
+                    <div class="alert alert-danger d-flex align-items-center" role="alert">
+                        La orden no tiene productos asignados
+                    </div>
+                }
+            }
+        </div>
+        if (Web.Security.AutorizeView.IsUserInRole(new string[] { "Cliente" }))
+        {
+            <div class="mt-5 text-end">
+                <span>Impuesto: @ViewBag.Impuesto</span>
+            </div>
+            <div class="mt-1 text-end">
+                <span class="text-danger">Total: @ViewBag.Total</span>
+            </div>
+        }
+        else if (Web.Security.AutorizeView.IsUserInRole(new string[] { "Mesero" }))
+        {
+
+            <div class="mt-5 text-end">
+                <span class="text-danger">Total: @ViewBag.TotalOrdenMesero</span>
+            </div>
+        }
+        <hr />
+
+        <button type="submit" class="botones" id="btnOrdenar">
+            <span class="glyphicon  glyphicon-floppy-save"></span>
+            Guardar Orden
+        </button>
+
+        @section Scripts {
+
+            @Scripts.Render("~/bundles/jqueryval")
+            @Scripts.Render("~/bundles/jqueryajax")
+
+            <script type="text/javascript">
+
+                //Actualizar cantidad de productos en el carrito
+                //Cambio de cantidad en caja de texto
+                function updateCantidad(ctr) {
+                    var txtCantidad = $(ctr);
+                    var cantidad = txtCantidad.val();
+                    var id = txtCantidad.data("productoid");
+                    $.ajax({
+                        type: "GET",
+                        dataType: 'text',
+                        url: "/Orden/actualizarCantidad",
+                        data: { "idProducto": id, "cantidad": cantidad },
+                        success: function (data) {
+                            $('#resultadoDetalle').html('');
+                            $('#resultadoDetalle').html(data);
+                            window.location.reload();
+
+                        }, error: function (xhr, status, error) {
+                            console.log("Error: " + error + " , No Error:" + xhr.status);
+                        }
+                    });
+                }
+
+
+            </script>
+        }
+    }
+</div>
+
+
+
+
+
+

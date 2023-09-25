@@ -1,0 +1,12 @@
+﻿/*Style Nav*/
+
+.enlaceNav, .enlaceNavv {
+    color: black;
+    font-size: 18px;
+}
+
+.enlaceNav:hover, .enlaceNavv:hover {
+    color: #F78935;
+}
+
+

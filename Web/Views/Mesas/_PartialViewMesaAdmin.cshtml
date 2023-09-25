@@ -1,0 +1,62 @@
+﻿@model IEnumerable<Infraestructure.Models.MESA>
+
+<div id="resultado" class="row text-center pt-4">
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">
+                    @Html.DisplayNameFor(model => model.COD_MESA)
+                </th>
+                <th scope="col">
+                    @Html.DisplayNameFor(model => model.RESTAURANTE)
+                </th>
+                <th scope="col">
+                    <label>Estado Mesa</label>
+                </th>
+                <th scope="col">
+                    @Html.DisplayNameFor(model => model.CAPACIDAD)
+                </th>
+                <th scope="col">Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.COD_MESA)
+                    </td>
+                    <td scope="row">
+                        @Html.DisplayFor(modelItem => item.RESTAURANTE.NOMBRE)
+                    </td>
+                    <td id="estadoMesas">
+                        @switch (item.ID_ESTADO_MESA)
+                        {
+                            case 1:
+                                <img style="width: 30px;" src="~/Resources/verde.png" /> break;
+                            case 2:
+                                <img style="width: 30px;" src="~/Resources/rojo.png" /> break;
+                            case 3:
+                                <img style="width: 30px;" src="~/Resources/azul.png" /> break;
+                            case 4:
+                                <img style="width: 30px;" src="~/Resources/celeste.png" /> break;
+                            case 5:
+                                <img style="width: 30px;" src="~/Resources/gris.png" /> break;
+                            case 6:
+                                <img style="width: 30px;" src="~/Resources/negro.png" />break;
+                        }
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CAPACIDAD)
+                    </td>
+                    <td class="d-flex justify-content-evenly text-center">
+                        <a href="@Url.Action("DetalleMesas", "Mesas", new {id = item.ID_MESA})" class="btn btn-primary btnAccion"><i class="fa-solid fa-circle-info"></i> Detalle</a>
+                        <a href="@Url.Action("EditarMesas", "Mesas", new {id = item.ID_MESA})" class="btn btn-primary btnAccion"><i class="fa-solid fa-pen"></i> Editar</a>
+                        <a href="@Url.Action("AperturaMesa", "Mesas", new {id = item.ID_MESA})" class="btn btn-primary btnAccion"><i class="fa-solid fa-pen"></i> Apertura</a>
+                        <a href="@Url.Action("Eliminar", "Mesas")" class="btn btn-primary btnAccion"><i class="fa-solid fa-trash"></i> Eliminar</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

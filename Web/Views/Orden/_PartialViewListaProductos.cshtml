@@ -1,0 +1,33 @@
+﻿@model IEnumerable<Infraestructure.Models.PRODUCTO>
+<div class="row" id="resultado">
+    @foreach (var item in Model)
+    {
+        <div class="col-lg-3 mb-4">
+            <div class="card text-center">
+                <img style="height: 200px; width: 100%;" src="@item.FOTOGRAFIA" class="card-img-top">
+                <div class="card-body">
+                    <h5 class="card-title">@item.CATEGORIA_PRODUCTO.NOMBRE</h5>
+                    <p class="card-text">@item.NOMBRE</p>
+                    <p class="card-text">₡@item.PRECIO.ToString("N")</p>
+                    @* Accion Orden *@
+                    <div>
+                        @Ajax.ActionLink("Agregar",
+                      "OrdenarProducto",
+                      "Orden",
+                      new
+                      {
+                          idProducto = item.ID_PRODUCTO
+                      },
+                      new AjaxOptions
+                      {
+                          UpdateTargetId = "cantidadProductos",
+                          InsertionMode = InsertionMode.Replace,
+                          HttpMethod = "GET",
+                      }, new { @class = "btn btn-primary", @id = "agregar" }
+                      )
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>

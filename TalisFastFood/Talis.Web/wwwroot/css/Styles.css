@@ -1,0 +1,88 @@
+﻿
+.enlaceNav {
+    color: black;
+    font-size: 18px;
+    text-decoration: none;
+    cursor: pointer;
+    padding: 3px;
+    color: #F78935;
+    font-weight: bold;
+}
+
+    .enlaceNav:hover {
+        color: #ffff;
+    }
+
+
+/*Style Body*/
+#cuerpo {
+    background-color: #FBFBFB;
+}
+
+#container {
+    width: 2500px;
+}
+
+/*Style Header*/
+#header {
+    width: 100%;
+    /*background-image: url(../Resources/imgfondo.jpg);*/
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 670px;
+    position: relative;
+}
+
+#headerIMG {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.5);
+    text-align: center;
+}
+
+.letrasHCalidad, .letrasHD {
+    color: white;
+    font-weight: bold;
+}
+
+.letrasHCalidad {
+    font-family: 'Tillana', cursive;
+    padding-top: 15%;
+}
+
+.letrasHD {
+    font-size: 40px;
+    font-family: 'Tillana', cursive;
+    padding-top: 6%;
+}
+
+#btnRegistro {
+    padding-top: 6%;
+}
+
+.registroHome {
+    background-color: #EC7C26;
+    border-color: #EC7C26;
+    padding: 10px 20px;
+    border-radius: 5px;
+    color: white;
+    font-weight: bold;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+    .registroHome:hover {
+        background-color: #F78935;
+        border-color: #F78935;
+        color: white;
+        font-weight: bold;
+    }
+
+.enlaceVolver {
+    color: black;
+}
+
+    .enlaceVolver:hover {
+        color: #F78935;
+    }

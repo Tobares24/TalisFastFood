@@ -1,0 +1,141 @@
+﻿@model Infraestructure.Models.ORDEN
+@{
+    ViewBag.Title = "Detalle Orden";
+    Layout = "~/Views/Shared/_LayoutSidebar.cshtml";
+    string FormatearFecha(DateTime fecha)
+    {
+        return fecha.ToString("dd/MM/yyyy");
+    }
+
+    double MontoTotal()
+    {
+        double suma = 0;
+        foreach (var item in Model.DETALLE_ORDEN)
+        {
+            suma += Convert.ToDouble(item.CANTIDAD) * item.MONTO_UNIDAD;
+        }
+        return suma;
+    }
+}
+
+
+<header style="padding: 20px; width: 100%; background-color: #F78935">
+    <h3 class="text-center text-white">Detalle Orden</h3>
+</header>
+
+<div class="text-start mt-4">
+    <a class="ps-2 enlaceVolver" href="@Url.Action("MisOrdenes", "Orden")"><i class="fa-solid fa-arrow-left"></i>Volver</a>
+</div>
+
+<div>
+    <h5 class="text-center pt-4" style="color: #F78935;">Orden</h5>
+</div>
+
+<div class="row pt-2 mt-4" style="text-align:justify; padding-left:5%;">
+    <div class="w-25">
+        <div class="mx-2 my-2">
+            <label style="font-weight:bold;">Número: </label>
+            @Html.DisplayFor(model => model.ID_ORDEN)
+        </div>
+
+        <div class="mx-2 my-2">
+            <label style="font-weight:bold;">Usuario: </label>
+            @Html.DisplayFor(model => model.USUARIO.NOMBRE)
+        </div>
+    </div>
+
+    <div class="w-25">
+        <div class="mx-2 my-2">
+            <label style="font-weight:bold;">Tipo de Rol: </label>
+            @Html.DisplayFor(model => model.USUARIO.ROL.TIPO_ROL)
+        </div>
+
+        <div class="mx-2 my-2">
+            <label style="font-weight:bold;">Estado: </label>
+            @Html.DisplayFor(model => model.ESTADO_ORDEN1.ESTADO)
+        </div>
+    </div>
+
+    <div class="w-25">
+        <div class="mx-2 my-2">
+            <label style="font-weight:bold;">Fecha: </label>
+            @FormatearFecha(Model.FECHA)
+        </div>
+
+        <div class="mx-2 my-2">
+            <label style="font-weight:bold;">Mesa: </label>
+            @Html.DisplayFor(model => model.MESA.COD_MESA)
+        </div>
+    </div>
+
+    <div class="w-25">
+        <div class="mx-2 my-2">
+            <label style="font-weight:bold;">Restaurante: </label>
+            @if (Model.USUARIO.RESTAURANTE != null)
+            {
+
+
+                <label>No Aplica</label>
+            }
+            else
+            {
+                @Html.DisplayFor(model => model.USUARIO.RESTAURANTE.UBICACION)
+            }
+        </div>
+
+        <div class="mx-2 my-2">
+            <label style="font-weight:bold;">Total: @MontoTotal().ToString("C")</label>
+        </div>
+    </div>
+
+</div>
+
+<div>
+    <h5 class="text-center pt-4" style="color: #F78935;">Productos</h5>
+</div>
+
+<div class="row text-center pt-4">
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Código</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Cantidad</th>
+                <th scope="col">Precio Unidad</th>
+                <th scope="col">Nota</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.DETALLE_ORDEN)
+            {
+                <tr>
+                    <th scope="row" class="w-25">
+                        @Html.DisplayFor(model => item.PRODUCTO.ID_PRODUCTO)
+                    </th>
+                    <td class="pt-4">
+                        @Html.DisplayFor(model => item.PRODUCTO.NOMBRE)
+                    </td>
+                    <td class="pt-4">
+                        @Html.DisplayFor(model => item.CANTIDAD)
+                    </td>
+                    <td class="pt-4">
+                        @Html.DisplayFor(model => item.MONTO_UNIDAD)
+                    </td>
+                    <td class="pt-4">
+                        @if (item.NOTA is null)
+                        {
+
+
+                            <label>No aplica</label>
+                        }
+                        else
+                        {
+                            @Html.DisplayFor(model => item.NOTA)
+                        }
+                    </td>
+                </tr>
+
+            }
+        </tbody>
+    </table>
+</div>

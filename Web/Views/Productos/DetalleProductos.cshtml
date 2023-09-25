@@ -1,0 +1,77 @@
+﻿@model Infraestructure.Models.PRODUCTO
+@{
+    ViewBag.Title = "Detalle Producto";
+    Layout = "~/Views/Shared/_LayoutSidebar.cshtml";
+}
+
+<header style="padding: 20px; width: 100%; background-color: #F78935">
+    <h3 class="text-center text-white">Detalle Producto</h3>
+</header>
+
+<div class="text-start mt-4">
+    <a class="ps-2 enlaceVolver" href="@Url.Action("Index", "Productos")"><i class="fa-solid fa-arrow-left"></i>Volver</a>
+</div>
+
+<div class="row text-center pt-2">
+    <div class="mx-2 my-2">
+        <label> @Html.DisplayFor(model => model.NOMBRE)</label>
+    </div>
+
+    <div class="mx-2 my-2">
+        <img src="@Model.FOTOGRAFIA"
+             role="img"
+             class="bd-placeholder-img" style="width:20%;">
+    </div>
+</div>
+
+<div class="row text-center pt-2 pb-0">
+    <table class="table">
+        <thead>
+            <tr class="text-center">
+                <th scope="col">Código</th>
+                <th scope="col">Descripción</th>
+                <th scope="col">Ingredientes</th>
+                <th scope="col">Precio</th>
+                <th scope="col">Estado</th>
+                <th scope="col">Categoría</th>
+                <th scope="col">Restaurante</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th scope="col">
+                    @Html.DisplayFor(model => model.ID_PRODUCTO)
+                </th>
+                <th scope="col">
+                    @Html.DisplayFor(model => model.DESCRIPCION)
+                </th>
+                <th scope="col">
+                    @Html.DisplayFor(model => model.INGREDIENTES)
+                </th>
+                <th scope="col">
+                    @Html.DisplayFor(model => model.PRECIO)
+                </th>
+                <th scope="col">
+                    @switch (Model.ESTADO)
+                    {
+                        case false:
+                            <label>Inactivo</label>
+                            break;
+                        case true:
+                            <label>Activo</label>
+                            break;
+                    }
+                </th>
+                <th scope="col"> @Html.DisplayFor(model => model.CATEGORIA_PRODUCTO.NOMBRE)</th>
+                <th scope="col">
+                    <ul class="d-flex flex-column justify-content-center">
+                        @foreach (var r in Model.RESTAURANTE)
+                        {
+                            <li style="list-style: none; display:flex; padding-left:10px;">@r.NOMBRE</li>
+                        }
+                    </ul>
+                </th>
+            </tr>
+        </tbody>
+    </table>
+</div>

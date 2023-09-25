@@ -1,0 +1,56 @@
+﻿@model IEnumerable<Infraestructure.Models.FACTURA>
+@{
+    ViewBag.Title = "Facturas";
+    Layout = "~/Views/Shared/_LayoutSidebar.cshtml";
+}
+
+<h2>Listado de Facturas</h2>
+
+<div id="resultado" class="row text-center pt-4">
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Número de Factura</th>
+                <th scope="col">Número de Orden</th>
+                <th scope="col">@Html.DisplayNameFor(model => model.SUBTOTAL)</th>
+                <th scope="col">@Html.DisplayNameFor(model => model.IMPUESTO)</th>
+                <th scope="col">@Html.DisplayNameFor(model => model.TOTAL)</th>
+                <th scope="col">@Html.DisplayNameFor(model => model.FECHA)</th>
+                <th scope="col">@Html.DisplayNameFor(model => model.MESA)</th>
+                <th scope="col">Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <th scope="row" class="w-25">
+                        @Html.DisplayFor(modelItem => item.ID_FACTURA)
+                    </th>
+                    <th scope="row" class="w-25">
+                        @Html.DisplayFor(modelItem => item.ID_ORDEN)
+                    </th>
+                    <td class="pt-4">
+                        @Html.DisplayFor(modelItem => item.SUBTOTAL)
+                    </td>
+                    <td class="pt-4">
+                        @Html.DisplayFor(modelItem => item.IMPUESTO)
+                    </td>
+                    <td class="pt-4">
+                        @Html.DisplayFor(modelItem => item.TOTAL)
+                    </td>
+                    <td class="pt-4">
+                        @item.FECHA.ToString("dd/MM/yyyy")
+                    </td>
+                    <td class="pt-4">
+                        @Html.DisplayFor(modelItem => item.MESA.COD_MESA)
+                    </td>
+                    <td class="d-flex justify-content-evenly text-center">
+                        <a href="@Url.Action("DetalleOrden", "Orden", new {id = item.ID_ORDEN})" class="btn btn-primary btnAccion m-1"><i class="fa-solid fa-circle-info"></i> Detalle</a>
+                        <a href="@Url.Action("Editar", "#", "EditarMesa")" class="btn btn-primary btnAccion m-1"><i class="fa-solid fa-pen"></i> Editar</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,91 @@
+﻿/*Style Header*/
+#contenedorR {
+    width: 100%;
+    background-image: url(../Resources/imgfondo.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 625px;
+    position: relative;
+}
+
+#contenedorRIMG {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.5);
+    text-align: center;
+    padding-top: 2%;
+}
+
+/*Style Nav*/
+#imgLogoNav {
+    width: 30%;
+}
+
+#contenidoNav {
+    padding-top: 1%;
+}
+
+.enlaceNav, .enlaceNavv {
+    color: black;
+    font-size: 20px;
+}
+
+.enlaceNav {
+    border-right: 1px solid #EC7C26;
+}
+
+    .enlaceNav:hover, .enlaceNavv:hover {
+        color: #EC7C26;
+    }
+
+/*Style Contenido Registro*/
+#contenidoR {
+    width: 70%;
+    border: 1px solid black;
+    background-color: #f7b482;
+    margin: 0 auto;
+    text-align: center;
+    margin-top: 1%;
+}
+
+#titulo {
+    color: white;
+    font-family: 'Tillana', cursive;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    background-color: #EC7C26;
+    border-bottom: 1px solid black;
+}
+
+
+.contenido {
+    display: flex;
+    padding-top: 1%;
+    padding-bottom: 1%;
+}
+
+.info {
+    width: 100%;
+}
+
+.texto {
+    text-align: center;
+    font-size: 18px;
+    width: 60%;
+}
+
+.registro {
+    background-color: #EC7C26;
+    border-color: #EC7C26;
+    padding: 5px 40px;
+    border-radius: 5px;
+    color: white;
+    font-weight: bold;
+    margin-bottom: 1%;
+}
+
+    .registro:hover {
+        background-color: #F78935;
+        border-color: #F78935;
+    }

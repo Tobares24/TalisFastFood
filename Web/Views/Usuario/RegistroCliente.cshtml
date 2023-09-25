@@ -1,0 +1,110 @@
+﻿@model Infraestructure.Models.USUARIO
+
+@{
+    ViewData["Title"] = "Registrarse";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div id="contenedorR">
+    <div id="contenedorRIMG">
+        <div id="contenidoR">
+
+            <h4 id="titulo">Registro</h4>
+
+            <div class="text-start">
+                <a class="ps-2 enlaceVolver" href="@Url.Action("Index", "Home")"><i class="fa-solid fa-arrow-left"></i>Volver</a>
+            </div>
+
+            @using (Html.BeginForm("SaveCliente", "Usuario", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="row justify-content-center align-content-center align-items-center">
+
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                    <div class="row m-3">
+                        <div class="col-6">
+                            <label class="texto">Número de cédula</label>
+                            <br>
+                            @Html.EditorFor(model => model.ID_USUARIO, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.ID_USUARIO, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="col-6">
+                            <label class="texto">Nombre</label>
+                            <br>
+                            @Html.EditorFor(model => model.NOMBRE, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.NOMBRE, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="row m-3">
+                        <div class="col-6">
+                            <label class="texto">Primer apellido</label>
+                            <br>
+                            @Html.EditorFor(model => model.PRIMER_APELLIDO, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.PRIMER_APELLIDO, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="col-6">
+                            <label class="texto">Segundo apellido</label>
+                            <br>
+                            @Html.EditorFor(model => model.SEGUNDO_APELLIDO, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.SEGUNDO_APELLIDO, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="row m-3">
+                        <div class="col-6">
+                            <label class="texto">Número de teléfono</label>
+                            <br>
+                            @Html.EditorFor(model => model.TELEFONO, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.TELEFONO, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="col-6">
+                            <label class="texto">Correo electrónico</label>
+                            <br>
+                            @Html.EditorFor(model => model.EMAIL, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.EMAIL, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="row m-3">
+                        <div class="col-6">
+                            <label class="texto">Contraseña</label>
+                            <br>
+                            @Html.EditorFor(model => model.CLAVE, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.CLAVE, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="col-6">
+                            <label class="texto">Confirmar Contraseña</label>
+                            <br>
+                            @Html.EditorFor(model => model.CLAVE, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.CLAVE, "", new { @class = "text-danger" })
+                        </div>
+
+                        <!--Parametros ocultos-->
+                        @Html.Hidden("ID_ROL", 1)
+                        @Html.Hidden("ID_RESTAURANTE", 1)
+                        @Html.Hidden("ROL", 1)
+                        @Html.Hidden("RESTAURANTE", 1)
+                        <br>
+                    </div>
+
+                    <div class="pb-4">
+                        <br>
+                        <button type="submit" class="registro">Registrarme</button>
+                        <br>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

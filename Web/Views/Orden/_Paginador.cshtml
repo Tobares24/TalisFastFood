@@ -1,0 +1,25 @@
+﻿@model Web.ViewModel.BaseModelo
+@{
+    var cantidadPaginas = (int)Math.Ceiling((double)Web.ViewModel.BaseModelo.TotalDeRegistros / Web.ViewModel.BaseModelo.RegistrosPorPaginas);
+}
+
+<ul class="pagination">
+    @if (Web.ViewModel.BaseModelo.PaginActual == 1)
+    {
+        <li class="disabled btn btn-primary btnAccion text-dark">@Html.ActionLink("Anterior", null, new { pagina = 1 })</li>
+    }
+    else
+    {
+        <li class="btn btn-primary btnAccion text-dark">@Html.ActionLink("Anterior", null, new { pagina = Web.ViewModel.BaseModelo.PaginActual - 1 })</li>
+    }
+
+    @if (Web.ViewModel.BaseModelo.PaginActual == cantidadPaginas)
+    {
+        <li class="disabled btn btn-primary btnAccion text-dark">@Html.ActionLink("Siguiente", null, new { pagina = cantidadPaginas })</li>
+
+    }
+    else
+    {
+        <li class="btn btn-primary btnAccion text-dark">@Html.ActionLink("Siguiente", null, new { pagina = Web.ViewModel.BaseModelo.PaginActual - 1 })</li>
+    }
+</ul>

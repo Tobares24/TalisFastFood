@@ -1,0 +1,45 @@
+﻿@model List<Web.ViewModel.ViewModelOrdenDetalle>
+
+<div class="table-responsive-sm">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Producto</th>
+                <th>Cantidad</th>
+                <th>Precio</th>
+                <th>Subtotal</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PRODUCTO.NOMBRE)
+                    </td>
+                    <td>
+                        @Html.EditorFor(modelItem => item.CANTIDAD,
+                   new
+                        {
+                            htmlAttributes = new
+                            {
+                                @class = "changeCantidad",
+                   data_productoid = item.PRODUCTO.ID_PRODUCTO,
+                   onchange = "updateCantidad(this)"
+                   }
+                        })
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.MONTO_UNIDAD)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.SubTotal)
+                    </td>
+                    <td></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+

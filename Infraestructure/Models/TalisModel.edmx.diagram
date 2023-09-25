@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="b94275d168ac498fbf27b0dfe0c3431c" Name="Diagram1">
+        <EntityTypeShape EntityType="TALIS_FAST_FOODModel.CATEGORIA_PRODUCTO" Width="1.5" PointX="0.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TALIS_FAST_FOODModel.DETALLE_ORDEN" Width="1.5" PointX="5.25" PointY="7.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="TALIS_FAST_FOODModel.ESTADO_MESA" Width="1.5" PointX="5.25" PointY="13.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="TALIS_FAST_FOODModel.ESTADO_ORDEN" Width="1.5" PointX="10.5" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="TALIS_FAST_FOODModel.FACTURA" Width="1.5" PointX="9.75" PointY="10.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="TALIS_FAST_FOODModel.FACTURA_TIPO_PAGO" Width="1.5" PointX="15" PointY="10.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="TALIS_FAST_FOODModel.MESA" Width="1.5" PointX="7.5" PointY="10.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="TALIS_FAST_FOODModel.ORDEN" Width="1.5" PointX="12.75" PointY="10.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="TALIS_FAST_FOODModel.PRODUCTO" Width="1.5" PointX="3" PointY="7" IsExpanded="true" />
+        <EntityTypeShape EntityType="TALIS_FAST_FOODModel.RESTAURANTE" Width="1.5" PointX="5.25" PointY="10.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="TALIS_FAST_FOODModel.ROL" Width="1.5" PointX="7.5" PointY="6.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="TALIS_FAST_FOODModel.TIPO_PAGO" Width="1.5" PointX="12.75" PointY="6.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="TALIS_FAST_FOODModel.USUARIO" Width="1.5" PointX="9.75" PointY="5.875" IsExpanded="true" />
+        <AssociationConnector Association="TALIS_FAST_FOODModel.FK_PRODUCTO_CATEGORIA_PRODUCTO" ManuallyRouted="false" />
+        <AssociationConnector Association="TALIS_FAST_FOODModel.FK_DETALLE_ORDEN_ORDEN" ManuallyRouted="false" />
+        <AssociationConnector Association="TALIS_FAST_FOODModel.FK_DETALLE_ORDEN_PRODUCTO" ManuallyRouted="false" />
+        <AssociationConnector Association="TALIS_FAST_FOODModel.FK_MESA_ESTADO_MESA" ManuallyRouted="false" />
+        <AssociationConnector Association="TALIS_FAST_FOODModel.FK_ORDEN_ESTADO_ORDEN" ManuallyRouted="false" />
+        <AssociationConnector Association="TALIS_FAST_FOODModel.FK_FACTURA_MESA" ManuallyRouted="false" />
+        <AssociationConnector Association="TALIS_FAST_FOODModel.FK_FACTURA_ORDEN" ManuallyRouted="false" />
+        <AssociationConnector Association="TALIS_FAST_FOODModel.FK_FACTURA_TIPO_PAGO_FACTURA" ManuallyRouted="false" />
+        <AssociationConnector Association="TALIS_FAST_FOODModel.FK_FACTURA_TIPO_PAGO_TIPO_PAGO" ManuallyRouted="false" />
+        <AssociationConnector Association="TALIS_FAST_FOODModel.FK_MESA_RESTAURANTE" ManuallyRouted="false" />
+        <AssociationConnector Association="TALIS_FAST_FOODModel.FK_ORDEN_MESA" ManuallyRouted="false" />
+        <AssociationConnector Association="TALIS_FAST_FOODModel.FK_ORDEN_USUARIO" ManuallyRouted="false" />
+        <AssociationConnector Association="TALIS_FAST_FOODModel.FK_USUARIO_RESTAURANTE" ManuallyRouted="false" />
+        <AssociationConnector Association="TALIS_FAST_FOODModel.FK_USUARIO_ROL" ManuallyRouted="false" />
+        <AssociationConnector Association="TALIS_FAST_FOODModel.MESA_USUARIO" ManuallyRouted="false" />
+        <AssociationConnector Association="TALIS_FAST_FOODModel.PRODUCTO_RESTAURANTE" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,131 @@
+﻿@model Infraestructure.Models.PRODUCTO
+@{
+    ViewBag.Title = "Editar Producto";
+    Layout = "~/Views/Shared/_LayoutSidebar.cshtml";
+}
+
+
+<header style="padding: 20px; width: 100%; background-color: #F78935">
+    <h3 class="text-center text-white">Información del Producto</h3>
+</header>
+
+<div class="text-start mt-4 pb-4">
+    <a class="ps-2 enlaceVolver" href="@Url.Action("Index", "Productos")"><i class="fa-solid fa-arrow-left"></i>Volver</a>
+</div>
+
+@using (Html.BeginForm("Save", "Productos", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    
+    @Html.HiddenFor(model => model.ID_PRODUCTO)
+
+    <div class="row pt-5 pb-4">
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="w-100 d-flex justify-content-center align-content-center align-items-center">
+
+            <div class="m-4 w-25">
+                @Html.LabelFor(model => model.NOMBRE, htmlAttributes: new { @class = "form-label mt-4" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.NOMBRE, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.NOMBRE, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="m-4 w-25">
+                @Html.LabelFor(model => model.FOTOGRAFIA, htmlAttributes: new { @class = "control-label mt-4" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.FOTOGRAFIA, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.FOTOGRAFIA, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="m-4 w-25">
+                @Html.LabelFor(model => model.PRECIO, htmlAttributes: new { @class = "control-label mt-4" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.PRECIO, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.PRECIO, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="m-4 w-25">
+                @Html.LabelFor(model => model.ID_CATEGORIA, htmlAttributes: new { @class = "form-label mt-4" })
+                <div class="col-md-10">
+                    @Html.DropDownListFor(model => model.ID_CATEGORIA,
+                   (SelectList)ViewBag.IdCategoria,
+                   "Selecione una categoría",
+                   htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.ID_CATEGORIA, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="w-100 d-flex justify-content-center align-content-center align-items-center">
+            <div class="m-4 w-25">
+                @Html.LabelFor(model => model.ESTADO, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    <div class="checkbox">
+                        @Html.CheckBoxFor(model => model.ESTADO)
+                        <span id="estado"></span>
+                        @Html.ValidationMessageFor(model => model.ESTADO, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+
+            <div class="m-4 w-25">
+                @Html.LabelFor(model => model.DESCRIPCION, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.TextAreaFor(model => model.DESCRIPCION, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.DESCRIPCION, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="m-4 w-25">
+                @Html.LabelFor(model => model.INGREDIENTES, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.TextAreaFor(model => model.INGREDIENTES, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.INGREDIENTES, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="m-4 w-25">
+                @Html.LabelFor(model => model.RESTAURANTE, htmlAttributes: new { @class = "form-label mt-4" })
+                <div class="col-md-10">
+                    @Html.DropDownList("selectedRestaurantes", (MultiSelectList)ViewBag.IdRestaurante,
+                   htmlAttributes: new { @class = "form-select", multiple = "multiple" })
+                    @Html.ValidationMessageFor(model => model.RESTAURANTE, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="text-center d-flex justify-content-center align-content-center align-items-center pt-5  pb-4">
+        <button type="submit" value="Guardar" class="botones mt-1 pt-2 pb-2" id="bg-link" style="width: 12%;">
+            <span><i class="fa-solid fa-floppy-disk pe-1"></i>Guardar</span>
+        </button>
+    </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <script>
+        $('#ESTADO').click(function () {
+            if ($('#ESTADO').is(':checked')) {
+                $('#estado').html('Activo')
+            } else {
+                $('#estado').html('Inactivo')
+            }
+        });
+    </script>
+
+    <script>
+        if ($('#ESTADO').is(':checked')) {
+            $("#estado").text('Activo');
+        } else {
+            $("#estado").text('Inactivo');
+        }
+    </script>
+}

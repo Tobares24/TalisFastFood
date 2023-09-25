@@ -1,0 +1,78 @@
+﻿@using Talis.Application.Dtos
+
+@model Pagination<ProductRequestDto>
+
+@{
+    ViewData["Title"] = "Productos";
+}
+
+<h1>Productos</h1>
+
+<a class="btn btn-primary">Crear Nuevo</a>
+
+
+<div class="my-4 d-flex align-items-center justify-content-center">
+    <partial name="_Search"/>
+</div>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Imagen</th>
+            <th>Nombre</th>
+            <th>Descripción</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var product in Model.Elements)
+        {
+            <tr>
+                <td>
+                    <img class="img-thumbnail" src="@ViewBag.ImageUrl">
+                </td>
+                <td>@product.Nombre</td>
+                <td>@product.DscProducto</td>
+                <td>
+                    <a class="btn btn-success">Editar</a>
+                    <a class="btn btn-danger">Borrar</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+<div class="row" style="display: flex; justify-content: end; align-content:center;">
+
+    <div class="col-auto d-flex justify-content-between">
+        <div class="d-flex justify-content-between">
+
+            <div class="d-flex align-items-center">
+                <span class="d-block w-100">Cantidad de filas:</span>
+            </div>
+            <div class="mx-3 d-flex align-items-center">
+                <select asp-for="@Model.NumRecordsPage" id="numRecordsPages" class="form-select d-block">
+                    <option>3</option>
+                    <option>5</option>
+                    <option>10</option>
+                    <option>25</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="col-auto d-flex align-items-center">
+            <partial name="_Pagination" />
+        </div>
+    </div>
+
+</div>
+
+@section Scripts{
+    <script>
+        $("#numRecordsPages").change(function () {
+            const recordsPages = $(this).val();
+            location.href = `/Product/?NumPage=1&NumRecordsPage=${recordsPages}`;
+        });
+    </script>
+}

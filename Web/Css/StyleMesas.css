@@ -1,0 +1,8 @@
+﻿/*Style Detalle Mesas*/
+.enlaceVolver{
+    color:black;
+}
+
+.enlaceVolver:hover {
+    color: #F78935;
+}

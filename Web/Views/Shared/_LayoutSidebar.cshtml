@@ -1,0 +1,144 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title</title>
+    <link rel="shortcut icon" href="~/Resources/logohamburguesa.jpg" type="image/gif" />
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    <script src="~/Scripts/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" type="text/css" media="screen" href="~/Css/Styles.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="~/Css/StyleTablas.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="~/Css/StyleMesas.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="~/Css/StyleIS.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+</head>
+
+<body style="margin: 0 auto; padding: 0;">
+
+    <div class="dropdown" style="display: flex; align-content: end; justify-content: end;">
+        @{
+            string nombre = "";
+
+            Infraestructure.Models.USUARIO oUsuario;
+
+            if (Session["User"] != null)
+            {
+                oUsuario = (Infraestructure.Models.USUARIO)Session["User"];
+                if (oUsuario != null)
+                {
+                    nombre = $"{oUsuario.NOMBRE} {oUsuario.PRIMER_APELLIDO} {oUsuario.SEGUNDO_APELLIDO}";
+                }
+            }
+        }
+        <button class="dropbtn">Usuario: @nombre</button>
+        <div class="dropdown-content">
+            @Html.ActionLink("Cerrar Sesión", "Logout", "InicioSesion", null, new { @class = "nav-link enlaceNav " })
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-8">
+
+            <div class="sidebar">
+
+                <div class="content_img">
+                    <img src="~/Resources/logohamburguesa.jpg" class="img-hamburguesa" />
+                </div>
+                <hr />
+
+                @if (Web.Security.AutorizeView.IsUserInRole(new string[] { "Administrador" }))
+                {
+                    <a href="@Url.Action("Index", "Mesas")" id="bg-link">
+                        <i class="fa-solid fa-utensils"></i>
+                        <span>Gestión de Mesas</span>
+                    </a>
+                    <a href="@Url.Action("Index", "Productos")" id="bg-link">
+                        <i class="fa-solid fa-burger"></i>
+                        <span>Gestión de Productos</span>
+                    </a>
+                    <a href="@Url.Action("Index", "Orden")" id="bg-link">
+                        <i class="fa-solid fa-cart-shopping"></i>
+                        <span>Gestión de Órdenes</span>
+                    </a>
+                    <a href="@Url.Action("Index", "Usuario")" id="bg-link">
+                        <i class="fa-solid fa-users"></i>
+                        <span>Gestión de Usuarios</span>
+                    </a>
+                    <a href="@Url.Action("Facturas", "Factura")" id="bg-link">
+                        <i class="fa-solid fa-list"></i>
+                        <span>Gestión de Facturación</span>
+                    </a>
+                }
+                else if (Web.Security.AutorizeView.IsUserInRole(new string[] { "Cliente" }))
+                {
+                    <a href="@Url.Action("ListaProductos", "Orden")" id="bg-link">
+                        <i class="fa-solid fa-bag-shopping"></i>
+                        <span>Catálogo de Productos</span>
+                    </a>
+                    <a href="@Url.Action("MisOrdenes", "Orden")" id="bg-link">
+                        <i class="fa-solid fa-list"></i>
+                        <span>Mis Órdenes</span>
+                    </a>
+                    <a href="@Url.Action("FacturaUsuario", "Factura")" id="bg-link">
+                        <i class="fa-solid fa-file-invoice"></i>
+                        <span>Mis Facturas</span>
+                    </a>
+                }
+                else if (Web.Security.AutorizeView.IsUserInRole(new string[] { "Mesero" }))
+                {
+                    <a href="@Url.Action("ListaMesas", "Mesas")" id="bg-link">
+                        <i class="fa-solid fa-list"></i>
+                        <span>Lista de Mesas</span>
+                    </a>
+                    <a href="@Url.Action("MisOrdenes", "Orden")" id="bg-link">
+                        <i class="fa-solid fa-cart-shopping"></i>
+                        <span>Gestión de Órdenes</span>
+                    </a>
+                    <a href="@Url.Action("Facturas", "Factura")" id="bg-link">
+                        <i class="fa-solid fa-list"></i>
+                        <span>Gestión de Facturación</span>
+                    </a>
+                }
+            </div>
+        </div>
+    </div>
+
+    <div class="content" style="height: 50%;">
+        @RenderBody()
+
+        <div id="footer" style="margin-top: 2%;">
+            <footer class="bg-light text-center text-black">
+                <div class="derechos text-center p-3"
+                     style="background-color: white">
+                    <a>&copy; Derechos Reservados @DateTime.Now.Year Tali's Fast Food</a>
+                </div>
+            </footer>
+        </div>
+    </div>
+
+
+    @Scripts.Render("~/bundles/jquery")
+    <script src="~/Scripts/bootstrap.bundle.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('[data-bs-toggle="tooltip"]').tooltip();
+        });
+    </script>
+    @*@Scripts.Render("~/bundles/bootstrap")*@
+
+    @Scripts.Render("~/bundles/sweetalert")
+
+    @RenderSection("scripts", required: false)
+    @if (ViewBag.NotificationMessage != null)
+    {
+        <script>
+            @Html.Raw(ViewBag.NotificationMessage)
+        </script>
+    }
+</body>
+</html>

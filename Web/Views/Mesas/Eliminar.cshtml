@@ -1,0 +1,21 @@
+﻿@model Infraestructure.Models.MESA
+
+@{
+    ViewBag.Title = "Eliminar";
+    Layout = "~/Views/Shared/_LayoutSidebar.cshtml";
+}
+
+<div class="container">
+    <div class="d-flex justify-content-center align-items-center" style="min-height: 100vh;">
+        <div class="d-block m-0 p-0 text-center">
+            <div>
+                <h3 class="mb-3">¿Está seguro que desea borrar la mesa @Model.COD_MESA</h3>
+            </div>
+            <div>
+                <a href="@Url.Action("EliminarMesa", "Mesas", new {id = @Model.ID_MESA})" class="btn btn-danger"><i class="fa-solid fa-trash"></i> Eliminar</a>
+                <a href="@Url.Action("Index", "Mesas")" class="btn btn-secondary"><i class="fa-solid fa-ban"></i> Cancelar</a>
+            </div>
+        </div>
+    </div>
+</div>
+

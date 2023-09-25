@@ -1,0 +1,19 @@
+﻿
+@{
+    ViewBag.Title = "Mensaje";
+    Layout = "~/Views/Shared/_LayoutSidebar.cshtml";
+}
+
+
+<div class="text-center" style="margin-top: 15%;">
+    <h2>Producto Guardado</h2>
+
+    <p>¡El producto se ha guardado con éxito!</p>
+
+    <div class="text-center">
+        <a href="@Url.Action("Index", "Productos")" class="botones mt-2 pt-2 pb-2" id="bg-link" style="width: 12%; margin: 0 auto;">
+            <span>Aceptar</span>
+        </a>
+    </div>
+</div>
+

@@ -1,0 +1,8 @@
+﻿.btnAccion {
+    background-color: #0489B1;
+}
+
+.btnAccion:hover {
+    background-color: #08A2F0;
+    border-color: #08A2F0;
+}
