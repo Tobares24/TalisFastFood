@@ -278,7 +278,7 @@ namespace Talis_Fast_Food.Controllers
             return DetalleOrden(id);
         }
 
-        [CustomAuthorize((int)Roles.Cliente)]
+        [CustomAuthorize((int)Roles.Cliente, (int)Roles.Mesero)]
         public ActionResult DetalleMiOrden(int? id)
         {
             if (TempData.ContainsKey("NotificationMessage"))

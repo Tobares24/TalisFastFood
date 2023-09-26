@@ -24,12 +24,12 @@
     <div class="list-group list-group-horizontal">
         @foreach (var estado in (List<Infraestructure.Models.ESTADO_ORDEN>)ViewBag.listaEstado)
         {
-            @Ajax.ActionLink(estado.ESTADO,//Texto para el usuario
-                                   "ordenesxEstado",//Acción a llamar
+            @Ajax.ActionLink(estado.ESTADO,
+                                   "ordenesxEstado",
                                    new
                                    {
                                        id = estado.ID_ESTADO_ORDEN
-                                   },//Parámetros para la acción
+                                   },
                                    new AjaxOptions
                                    {
                                        UpdateTargetId = "resultado",

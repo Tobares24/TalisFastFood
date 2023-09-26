@@ -46,7 +46,7 @@ namespace Infraestructure.Repository
                 using (MyContext ctx = new MyContext())
                 {
                     ctx.Configuration.LazyLoadingEnabled = false;
-                    list = ctx.ORDEN.Include("DETALLE_ORDEN").Include("ESTADO_ORDEN1").Include("USUARIO").ToList();
+                    list = ctx.ORDEN.Include("DETALLE_ORDEN").Include("ESTADO_ORDEN").Include("USUARIO").ToList();
                 }
                 return list;
             }
